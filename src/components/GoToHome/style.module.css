@@ -1,0 +1,21 @@
+.go-to-home {
+  display: flex;
+  background-color: var(--surface-container-low);
+  justify-content: center;
+  padding-block: var(--size-2);
+}
+
+.go-to-home > a {
+  display: flex;
+  align-items: center;
+  gap: var(--size-1);
+  color: var(--on-surface);
+}
+
+.go-to-home > a:hover {
+  text-decoration: none;
+}
+.icon {
+  inline-size: 1.5em;
+  fill: var(--on-surface);
+}
