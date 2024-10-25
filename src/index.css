@@ -1,0 +1,174 @@
+:root {
+  box-sizing: border-box;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  color-scheme: light dark;
+  --size-1: clamp(0.25rem, 0.75vw, 0.5rem);
+  --size-2: clamp(0.5rem, 1.5vw, 1rem);
+  --size-3: clamp(1rem, 3vw, 2rem);
+
+  --fs-1: clamp(1.25rem, 1.5vw, 1.5rem);
+}
+
+@media screen and (prefers-color-scheme: light) {
+  :root {
+    --primary: rgb(103 96 19);
+    --surface-tint: rgb(103 96 19);
+    --on-primary: rgb(255 255 255);
+    --primary-container: rgb(240 229 139);
+    --on-primary-container: rgb(31 28 0);
+    --secondary: rgb(99 95 65);
+    --on-secondary: rgb(255 255 255);
+    --secondary-container: rgb(234 227 189);
+    --on-secondary-container: rgb(31 28 5);
+    --tertiary: rgb(64 102 83);
+    --on-tertiary: rgb(255 255 255);
+    --tertiary-container: rgb(194 236 211);
+    --on-tertiary-container: rgb(0 33 20);
+    --error: rgb(186 26 26);
+    --on-error: rgb(255 255 255);
+    --error-container: rgb(255 218 214);
+    --on-error-container: rgb(65 0 2);
+    --background: rgb(254 249 235);
+    --on-background: rgb(29 28 20);
+    --surface: rgb(254 249 235);
+    --on-surface: rgb(29 28 20);
+    --surface-variant: rgb(232 226 208);
+    --on-surface-variant: rgb(73 71 58);
+    --outline: rgb(122 119 104);
+    --outline-variant: rgb(203 199 181);
+    --shadow: rgb(0 0 0);
+    --scrim: rgb(0 0 0);
+    --inverse-surface: rgb(50 49 39);
+    --inverse-on-surface: rgb(246 240 227);
+    --inverse-primary: rgb(211 201 114);
+    --primary-fixed: rgb(240 229 139);
+    --on-primary-fixed: rgb(31 28 0);
+    --primary-fixed-dim: rgb(211 201 114);
+    --on-primary-fixed-variant: rgb(78 72 0);
+    --secondary-fixed: rgb(234 227 189);
+    --on-secondary-fixed: rgb(31 28 5);
+    --secondary-fixed-dim: rgb(206 199 163);
+    --on-secondary-fixed-variant: rgb(75 71 43);
+    --tertiary-fixed: rgb(194 236 211);
+    --on-tertiary-fixed: rgb(0 33 20);
+    --tertiary-fixed-dim: rgb(166 208 184);
+    --on-tertiary-fixed-variant: rgb(40 78 60);
+    --surface-dim: rgb(222 218 204);
+    --surface-bright: rgb(254 249 235);
+    --surface-container-lowest: rgb(255 255 255);
+    --surface-container-low: rgb(248 243 229);
+    --surface-container: rgb(243 238 224);
+    --surface-container-high: rgb(237 232 218);
+    --surface-container-highest: rgb(231 226 213);
+    --disabled-filter: brightness(120%);
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --primary: rgb(211 201 114);
+    --surface-tint: rgb(211 201 114);
+    --on-primary: rgb(54 49 0);
+    --primary-container: rgb(78 72 0);
+    --on-primary-container: rgb(240 229 139);
+    --secondary: rgb(206 199 163);
+    --on-secondary: rgb(52 49 23);
+    --secondary-container: rgb(75 71 43);
+    --on-secondary-container: rgb(234 227 189);
+    --tertiary: rgb(166 208 184);
+    --on-tertiary: rgb(16 55 38);
+    --tertiary-container: rgb(40 78 60);
+    --on-tertiary-container: rgb(194 236 211);
+    --error: rgb(255 180 171);
+    --on-error: rgb(105 0 5);
+    --error-container: rgb(147 0 10);
+    --on-error-container: rgb(255 218 214);
+    --background: rgb(21 20 12);
+    --on-background: rgb(231 226 213);
+    --surface: rgb(21 20 12);
+    --on-surface: rgb(231 226 213);
+    --surface-variant: rgb(73 71 58);
+    --on-surface-variant: rgb(203 199 181);
+    --outline: rgb(149 145 129);
+    --outline-variant: rgb(73 71 58);
+    --shadow: rgb(0 0 0);
+    --scrim: rgb(0 0 0);
+    --inverse-surface: rgb(231 226 213);
+    --inverse-on-surface: rgb(50 49 39);
+    --inverse-primary: rgb(103 96 19);
+    --primary-fixed: rgb(240 229 139);
+    --on-primary-fixed: rgb(31 28 0);
+    --primary-fixed-dim: rgb(211 201 114);
+    --on-primary-fixed-variant: rgb(78 72 0);
+    --secondary-fixed: rgb(234 227 189);
+    --on-secondary-fixed: rgb(31 28 5);
+    --secondary-fixed-dim: rgb(206 199 163);
+    --on-secondary-fixed-variant: rgb(75 71 43);
+    --tertiary-fixed: rgb(194 236 211);
+    --on-tertiary-fixed: rgb(0 33 20);
+    --tertiary-fixed-dim: rgb(166 208 184);
+    --on-tertiary-fixed-variant: rgb(40 78 60);
+    --surface-dim: rgb(21 20 12);
+    --surface-bright: rgb(59 57 48);
+    --surface-container-lowest: rgb(15 14 7);
+    --surface-container-low: rgb(29 28 20);
+    --surface-container: rgb(33 32 23);
+    --surface-container-high: rgb(44 42 33);
+    --surface-container-highest: rgb(55 53 44);
+    --disabled-filter: brightness(70%);
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--on-background);
+}
+body,
+h1,
+h2,
+h3,
+p,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+button:enabled {
+  cursor: pointer;
+}
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+button:disabled {
+  filter: var(--disabled-filter);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  button:hover:enabled {
+    filter: brightness(110%);
+  }
+  button:active:enabled {
+    filter: brightness(120%);
+  }
+}
+
+@media screen and (prefers-color-scheme: light) {
+  button:hover:enabled {
+    filter: brightness(95%);
+  }
+  button:active:enabled {
+    filter: brightness(90%);
+  }
+}
