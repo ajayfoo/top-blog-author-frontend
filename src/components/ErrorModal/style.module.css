@@ -1,0 +1,31 @@
+.error-modal {
+  background-color: var(--error-container);
+  color: var(--on-error-container);
+  border: none;
+  border-radius: var(--size-2);
+}
+.info {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2);
+  margin-block-end: var(--size-2);
+}
+.error-icon {
+  inline-size: 2em;
+  block-size: 2em;
+  fill: var(--on-error-container);
+}
+
+.message {
+  color: var(--on-error-container);
+}
+
+.error-modal > button {
+  background-color: var(--error);
+  color: var(--on-error);
+  border: none;
+  border-radius: var(--size-1);
+  padding: var(--size-1) var(--size-2);
+  display: block;
+  margin: 0 auto;
+}

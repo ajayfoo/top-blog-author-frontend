@@ -1,0 +1,17 @@
+.field {
+  display: grid;
+  gap: var(--size-1);
+}
+
+.disabled {
+  filter: var(--disabled-filter);
+}
+
+.error {
+  color: var(--error);
+  font-size: small;
+}
+
+.error-border-color {
+  border-color: var(--error);
+}

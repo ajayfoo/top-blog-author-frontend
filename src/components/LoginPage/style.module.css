@@ -1,0 +1,58 @@
+.main {
+  display: grid;
+  place-content: center;
+  min-block-size: 100vh;
+}
+
+.wrapper {
+  background-color: var(--surface-container-low);
+  border-radius: var(--size-3);
+}
+
+.form {
+  background-color: var(--surface-container);
+  color: var(--on-surface);
+  padding: var(--size-3);
+  display: grid;
+  gap: var(--size-2);
+  inline-size: clamp(28ch, 35vw, 33ch);
+  border-radius: var(--size-3);
+}
+
+.login {
+  justify-self: center;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: var(--size-1);
+  padding: var(--size-1) var(--size-2);
+}
+
+.action-buttons {
+  margin-block-start: var(--size-2);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.sign-up,
+.disabled-sign-up {
+  color: var(--secondary);
+}
+.sign-up:hover {
+  text-decoration: none;
+}
+
+.spinner > svg > g {
+  stroke: var(--on-primary);
+}
+
+.disabled-sign-up {
+  filter: var(--disabled-filter);
+}
+
+.invalid-cred-msg {
+  font-size: small;
+  color: var(--error);
+  text-align: center;
+}

@@ -1,0 +1,46 @@
+@import url("../field.css");
+
+.input-wrapper > input {
+  font-family: inherit;
+  font-size: inherit;
+  background-color: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+}
+
+.input-wrapper > input {
+  padding: var(--size-1) var(--size-2);
+  border-radius: var(--size-1);
+  border: none;
+  flex-grow: 1;
+  inline-size: 100%;
+}
+
+.input-wrapper {
+  background-color: var(--tertiary-container);
+  border: 1px solid transparent;
+  border-radius: var(--size-1);
+  display: flex;
+  padding-inline-end: var(--size-2);
+}
+
+.input-wrapper > input:focus {
+  outline: none;
+}
+
+.input-wrapper:has(input:focus) {
+  border: 1px solid var(--outline);
+}
+
+.eye-button {
+  align-self: center;
+  background-color: unset;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+.eye {
+  inline-size: 1.5em;
+  block-size: 1.5em;
+  fill: var(--on-tertiary-container);
+}

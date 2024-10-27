@@ -1,0 +1,19 @@
+@import url("../field.css");
+
+.field > input {
+  border-radius: var(--size-1);
+  padding: var(--size-1) var(--size-2);
+  font-family: inherit;
+  font-size: inherit;
+  background-color: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+}
+
+.field > input:focus {
+  outline: none;
+  border: 1px solid var(--outline);
+}
+
+.field > input {
+  border: 1px solid transparent;
+}
