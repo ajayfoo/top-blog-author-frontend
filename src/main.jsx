@@ -11,9 +11,17 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import { getUsernameIfAuthorizedElseNull } from "./utils.js";
+import { fetchPosts, getUsernameIfAuthorizedElseNull } from "./utils.js";
 
-const redirectToLoginPageIfAuthorized = async () => {
+const redirectToHomePageIfAuthorized = async () => {
+  const username = await getUsernameIfAuthorizedElseNull();
+  if (username) {
+    return redirect("/");
+  }
+  return null;
+};
+
+const redirectToLoginPageIfUnAuthorized = async () => {
   const username = await getUsernameIfAuthorizedElseNull();
   if (!username) {
     return redirect("/auth/login");
@@ -25,11 +33,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    loader: redirectToLoginPageIfAuthorized,
+    loader: redirectToLoginPageIfUnAuthorized,
     errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
+        loader: fetchPosts,
         element: <PostsPage />,
       },
       {
@@ -41,6 +50,7 @@ const router = createBrowserRouter([
   {
     path: "/auth/login",
     errorElement: <ErrorPage />,
+    loader: redirectToHomePageIfAuthorized,
     element: <LoginPage />,
   },
 ]);
