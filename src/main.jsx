@@ -42,6 +42,11 @@ const router = createBrowserRouter([
         element: <PostsPage />,
       },
       {
+        path: "/posts",
+        loader: fetchPosts,
+        element: <PostsPage />,
+      },
+      {
         path: "/account",
         element: <AccountPage />,
       },

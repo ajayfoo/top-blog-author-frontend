@@ -1,0 +1,6 @@
+.posts-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+  gap: var(--size-2);
+  margin-inline: var(--size-3);
+}

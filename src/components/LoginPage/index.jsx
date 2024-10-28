@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import ErrorModal from "../ErrorModal";
 import UsernameField from "./UsernameField";
 import PasswordField from "./PasswordField";
-import GoToHome from "../GoToHome";
 
 const sendLoginRequest = async (username, password) => {
   const url = import.meta.env.VITE_API_URL + "/auth/login";
@@ -133,7 +132,6 @@ function LoginPage() {
   return (
     <main className={classes.main}>
       <div className={classes.wrapper}>
-        <GoToHome />
         <LoginForm />
       </div>
     </main>
