@@ -12,6 +12,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { getUsernameIfAuthorizedElseNull } from "./utils.js";
+import PostPage from "./components/PostPage/index.jsx";
 
 const redirectToHomePageIfAuthorized = async () => {
   const username = await getUsernameIfAuthorizedElseNull();
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/posts",
         element: <PostsPage />,
+      },
+      {
+        path: "/posts/:id",
+        element: <PostPage />,
       },
       {
         path: "/account",
