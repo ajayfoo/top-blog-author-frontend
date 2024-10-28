@@ -7,9 +7,13 @@ const useFetchData = (url) => {
   const [data, setData] = useState(null);
   useEffect(() => {
     const controller = new AbortController();
+    const auth = localStorage.getItem("auth");
     const fetchAndSetPosts = async () => {
       try {
         const res = await fetch(url, {
+          headers: {
+            Authorization: auth,
+          },
           signal: controller.signal,
           mode: "cors",
         });

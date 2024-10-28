@@ -35,18 +35,4 @@ const getUsernameIfAuthorizedElseNull = async (signal = null) => {
   }
 };
 
-const fetchPosts = () => {
-  const auth = localStorage.getItem("auth");
-  return fetch(import.meta.env.VITE_API_URL + "/posts", {
-    headers: {
-      Authorization: auth,
-    },
-  });
-};
-
-export {
-  getElapsedTime,
-  UserStatus,
-  getUsernameIfAuthorizedElseNull,
-  fetchPosts,
-};
+export { getElapsedTime, UserStatus, getUsernameIfAuthorizedElseNull };

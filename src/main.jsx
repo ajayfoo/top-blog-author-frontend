@@ -11,7 +11,7 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import { fetchPosts, getUsernameIfAuthorizedElseNull } from "./utils.js";
+import { getUsernameIfAuthorizedElseNull } from "./utils.js";
 
 const redirectToHomePageIfAuthorized = async () => {
   const username = await getUsernameIfAuthorizedElseNull();
@@ -38,12 +38,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: fetchPosts,
         element: <PostsPage />,
       },
       {
         path: "/posts",
-        loader: fetchPosts,
         element: <PostsPage />,
       },
       {
