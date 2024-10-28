@@ -30,6 +30,14 @@
   color: var(--secondary);
 }
 
+.action-buttons > button {
+  padding: 0;
+  background-color: unset;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
 .delete-icon {
   inline-size: 1em;
   block-size: 1em;

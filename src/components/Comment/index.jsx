@@ -76,7 +76,6 @@ function Comment({ comment, onDeleteComment }) {
           <button
             type="button"
             onClick={handleDeleteClick}
-            className={classes["edit-button"]}
             title="delete comment"
             aria-label="delete comment"
           >
