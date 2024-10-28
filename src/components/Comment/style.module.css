@@ -1,0 +1,43 @@
+.comment {
+  padding: var(--size-2);
+  background-color: var(--surface-container-high);
+  box-shadow: inset 0 0 5px var(--scrim);
+  border-radius: var(--size-2);
+  word-break: break-word;
+}
+
+.comment > header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-2);
+  justify-content: flex-start;
+  background: linear-gradient(
+    to right,
+    var(--surface-container-highest),
+    var(--surface-container-high)
+  );
+}
+
+.username {
+  color: var(--primary);
+}
+
+.time-elapsed {
+  color: var(--tertiary);
+}
+
+.content {
+  color: var(--secondary);
+}
+
+.delete-icon {
+  inline-size: 1em;
+  block-size: 1em;
+  justify-self: flex-end;
+  fill: var(--tertiary);
+}
+
+.action-buttons {
+  display: flex;
+  gap: var(--size-1);
+}

@@ -11,7 +11,6 @@ function Post() {
   return (
     <section className={classes.post}>
       <header>
-        <span className={classes.author}>{post.author.username}</span>
         <h1 className={classes.title}>{post.title}</h1>
         <p className={classes["updated-at"]}>
           Last updated on <time dateTime={post.updatedAt}>{updatedAt}</time>

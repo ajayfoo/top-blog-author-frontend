@@ -1,0 +1,21 @@
+.comments {
+  margin-block-start: var(--size-3);
+  background-color: var(--surface-container);
+  padding: var(--size-3);
+  border-radius: var(--size-3);
+  display: grid;
+  gap: var(--size-2);
+}
+.comment-items {
+  display: grid;
+  gap: var(--size-1);
+  justify-items: flex-start;
+}
+.dummy-add-comment-wrapper {
+  text-decoration: none;
+  color: unset;
+}
+
+.dummy-add-comment-wrapper * {
+  cursor: unset;
+}

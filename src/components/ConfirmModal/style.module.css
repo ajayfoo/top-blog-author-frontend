@@ -1,0 +1,31 @@
+.confirm-modal {
+  border: none;
+  background-color: var(--surface-container-highest);
+  color: var(--on-surface);
+  border-radius: var(--size-2);
+}
+
+.message {
+  margin-block-end: var(--size-2);
+  text-align: center;
+}
+.action-buttons {
+  display: flex;
+  gap: var(--size-2);
+  justify-content: center;
+}
+
+.confirm,
+.cancel {
+  border: none;
+  padding: var(--size-1) var(--size-2);
+  border-radius: var(--size-1);
+}
+.confirm {
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
+}
+.cancel {
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+}
