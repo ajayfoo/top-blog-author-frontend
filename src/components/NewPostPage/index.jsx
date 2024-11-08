@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Editor from "../Editor";
 
 const createNewPost = async (title, body, isHidden) => {
   const auth = localStorage.getItem("auth");
@@ -20,6 +21,7 @@ const NewPostForm = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [isHidden, setIsHidden] = useState(true);
+  const quillRef = useRef(null);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleBodyChange = (e) => setBody(e.target.value);
@@ -42,23 +44,14 @@ const NewPostForm = () => {
     <form onSubmit={handleSubmit}>
       <section className="field">
         <label htmlFor={titleFieldId}>Title</label>
-        <input
-          type="text"
+        <textarea
           id={titleFieldId}
           onChange={handleTitleChange}
           value={title}
           required
         />
       </section>
-      <section className="field">
-        <label htmlFor={bodyFieldId}>Body</label>
-        <textarea
-          id={bodyFieldId}
-          onChange={handleBodyChange}
-          value={body}
-          required
-        />
-      </section>
+      <Editor ref={quillRef} />
       <section className="field">
         <label htmlFor={isHiddenFieldId}>Is Hidden</label>
         <input
