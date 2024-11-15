@@ -11,21 +11,21 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import { getUsernameIfAuthorizedElseNull } from "./utils.js";
+import { getUserIfAuthorizedElseNull } from "./utils.js";
 import PostPage from "./components/PostPage/index.jsx";
 import NewPostPage from "./components/NewPostPage/index.jsx";
 
 const redirectToHomePageIfAuthorized = async () => {
-  const username = await getUsernameIfAuthorizedElseNull();
-  if (username) {
+  const user = await getUserIfAuthorizedElseNull();
+  if (user) {
     return redirect("/");
   }
   return null;
 };
 
 const redirectToLoginPageIfUnAuthorized = async () => {
-  const username = await getUsernameIfAuthorizedElseNull();
-  if (!username) {
+  const user = await getUserIfAuthorizedElseNull();
+  if (!user) {
     return redirect("/auth/login");
   }
   return null;

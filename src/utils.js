@@ -12,8 +12,8 @@ const UserStatus = {
   UNAUTHORIZED: "unauthorized",
 };
 
-const getUsernameIfAuthorizedElseNull = async (signal = null) => {
-  const url = import.meta.env.VITE_API_URL + "/usernames";
+const getUserIfAuthorizedElseNull = async (signal = null) => {
+  const url = import.meta.env.VITE_API_URL + "/users";
   const auth = localStorage.getItem("auth");
   try {
     const res = await fetch(url, {
@@ -26,8 +26,8 @@ const getUsernameIfAuthorizedElseNull = async (signal = null) => {
     if (!res.ok) {
       return null;
     }
-    const username = await res.text();
-    return username;
+    const user = await res.json();
+    return user;
   } catch (err) {
     if (err.name === "AbortError") return;
     console.error(err);
@@ -35,4 +35,4 @@ const getUsernameIfAuthorizedElseNull = async (signal = null) => {
   }
 };
 
-export { getElapsedTime, UserStatus, getUsernameIfAuthorizedElseNull };
+export { getElapsedTime, UserStatus, getUserIfAuthorizedElseNull };
