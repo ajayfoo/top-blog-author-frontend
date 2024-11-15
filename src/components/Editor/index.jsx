@@ -1,9 +1,5 @@
-import Quill from "quill";
+import Quill from "quill/core";
 import "./style.css";
-const ColorClass = Quill.import("attributors/class/color");
-const SizeStyle = Quill.import("attributors/style/size");
-Quill.register(ColorClass, true);
-Quill.register(SizeStyle, true);
 
 import { forwardRef, useEffect, useRef } from "react";
 
@@ -14,13 +10,8 @@ const Editor = forwardRef((props, ref) => {
     const editorContainer = container.appendChild(
       container.ownerDocument.createElement("div")
     );
-    const toolbarOptions = ["bold", "italic", "underline"];
 
-    ref.current = new Quill(editorContainer, {
-      modules: {
-        toolbar: toolbarOptions,
-      },
-    });
+    ref.current = new Quill(editorContainer);
     return () => {
       ref.current = null;
       container.textContent = "";

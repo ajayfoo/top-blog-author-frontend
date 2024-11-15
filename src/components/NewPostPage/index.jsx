@@ -19,7 +19,6 @@ const createNewPost = async (title, body, isHidden) => {
 
 const NewPostForm = () => {
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
   const [isHidden, setIsHidden] = useState(true);
   const quillRef = useRef(null);
 
@@ -29,6 +28,7 @@ const NewPostForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const body = JSON.stringify(quillRef.current.getContents());
     try {
       const newPostId = createNewPost(title, body, isHidden);
       if (!newPostId) throw new Error("Failed to create post");
