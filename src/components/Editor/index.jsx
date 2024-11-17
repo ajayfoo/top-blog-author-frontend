@@ -1,5 +1,6 @@
 import Quill from "quill/core";
 import "./style.css";
+import classes from "./style.module.css";
 
 import { forwardRef, useEffect, useRef } from "react";
 
@@ -17,7 +18,13 @@ const Editor = forwardRef(({ labelledBy }, ref) => {
       container.textContent = "";
     };
   }, [ref]);
-  return <div aria-labelledby={labelledBy} ref={containerRef}></div>;
+  return (
+    <div
+      className={classes.container}
+      aria-labelledby={labelledBy}
+      ref={containerRef}
+    ></div>
+  );
 });
 
 Editor.displayName = "Editor";

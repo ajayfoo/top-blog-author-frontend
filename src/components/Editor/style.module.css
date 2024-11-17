@@ -1,0 +1,3 @@
+.container {
+  min-inline-size: clamp(30ch, 55vw, 75ch);
+}
