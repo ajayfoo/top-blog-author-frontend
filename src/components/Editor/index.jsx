@@ -6,18 +6,26 @@ import "./Blots";
 import SupportedBlots from "./Blots/supportedBlots.js";
 
 const Toolbar = ({ quillRef }) => {
-  const handleBoldClick = () => {
-    quillRef.current.format(SupportedBlots.BOLD, true);
+  const toggleBold = () => {
+    const currentFormat = quillRef.current.getFormat();
+    quillRef.current.format(
+      SupportedBlots.BOLD,
+      !Boolean(currentFormat[SupportedBlots.BOLD])
+    );
   };
-  const handleItalicClick = () => {
-    quillRef.current.format(SupportedBlots.ITALIC, true);
+  const toggleItalic = () => {
+    const currentFormat = quillRef.current.getFormat();
+    quillRef.current.format(
+      SupportedBlots.ITALIC,
+      !Boolean(currentFormat[SupportedBlots.ITALIC])
+    );
   };
   return (
     <div className="toolbar">
-      <button onClick={handleBoldClick} type="button">
+      <button onClick={toggleBold} type="button">
         Bold
       </button>
-      <button onClick={handleItalicClick} type="button">
+      <button onClick={toggleItalic} type="button">
         Italic
       </button>
     </div>
