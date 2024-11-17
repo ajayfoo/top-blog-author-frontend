@@ -24,7 +24,6 @@ const NewPostForm = () => {
   const quillRef = useRef(null);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
-  const handleBodyChange = (e) => setBody(e.target.value);
   const handleIsHiddenChange = (e) => setIsHidden(e.target.checked);
 
   const handleSubmit = async (e) => {
@@ -50,22 +49,23 @@ const NewPostForm = () => {
           onChange={handleTitleChange}
           value={title}
           required
+          className={classes["title-input"]}
         />
       </section>
       <section className={classes.field}>
         <span id={bodyLabelId}>Body</span>
         <Editor labelledBy={bodyLabelId} ref={quillRef} />
       </section>
-      <section>
-        <label htmlFor={isHiddenFieldId}>Is Hidden</label>
+      <section className={classes["is-hidden-field"]}>
         <input
           type="checkbox"
           id={isHiddenFieldId}
           onChange={handleIsHiddenChange}
           checked={isHidden}
         />
+        <label htmlFor={isHiddenFieldId}>Is hidden</label>
       </section>
-      <button>Create</button>
+      <button className={classes["create-button"]}>Create</button>
     </form>
   );
 };
