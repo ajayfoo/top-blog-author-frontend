@@ -3,18 +3,32 @@ import { Link } from "react-router-dom";
 import classes from "./style.module.css";
 import { format } from "date-fns";
 
+const POST_PREVIEW_MAX_LENGTH = 20;
+
+const formattedBody = (quillContents) => {
+  const parsedBody = JSON.parse(quillContents).ops;
+  let bodyContent = "";
+  for (const ele of parsedBody) {
+    bodyContent += ele.insert;
+    if (bodyContent.length > POST_PREVIEW_MAX_LENGTH) {
+      break;
+    }
+  }
+  return (
+    <>
+      {bodyContent.slice(0, POST_PREVIEW_MAX_LENGTH)}
+      {bodyContent.length > POST_PREVIEW_MAX_LENGTH && <>&hellip;</>}
+    </>
+  );
+};
+
 function PostPreview({ post }) {
   const updatedAt = format(post.updatedAt, "d MMM yyyy");
+  const body = formattedBody(post.body);
   const title = (
     <>
       {post.title.slice(0, 20)}
       {post.title.length > 20 && <>&hellip;</>}
-    </>
-  );
-  const body = (
-    <>
-      {post.body.slice(0, 20)}
-      {post.body.length > 20 && <>&hellip;</>}
     </>
   );
   return (

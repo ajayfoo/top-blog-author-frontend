@@ -32,9 +32,7 @@ function Post() {
           Last updated on <time dateTime={post.updatedAt}>{updatedAt}</time>
         </p>
       </header>
-      <div className={classes.body} ref={bodyContainerRef}>
-        {post.body}
-      </div>
+      <div className={classes.body} ref={bodyContainerRef}></div>
     </section>
   );
 }
