@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import Editor from "../Editor";
+import classes from "./style.module.css";
 
 const createNewPost = async (title, body, isHidden) => {
   const auth = localStorage.getItem("auth");
@@ -38,11 +39,11 @@ const NewPostForm = () => {
   };
 
   const titleFieldId = "new-post-form-title";
-  const bodyFieldId = "new-post-form-body";
+  const bodyLabelId = "new-post-form-body";
   const isHiddenFieldId = "new-post-form-is-hidden";
   return (
-    <form onSubmit={handleSubmit}>
-      <section className="field">
+    <form className={classes.form} onSubmit={handleSubmit}>
+      <section className={classes.field}>
         <label htmlFor={titleFieldId}>Title</label>
         <textarea
           id={titleFieldId}
@@ -51,8 +52,11 @@ const NewPostForm = () => {
           required
         />
       </section>
-      <Editor ref={quillRef} />
-      <section className="field">
+      <section className={classes.field}>
+        <span id={bodyLabelId}>Body</span>
+        <Editor labelledBy={bodyLabelId} ref={quillRef} />
+      </section>
+      <section>
         <label htmlFor={isHiddenFieldId}>Is Hidden</label>
         <input
           type="checkbox"
@@ -68,7 +72,7 @@ const NewPostForm = () => {
 
 const NewPostPage = () => {
   return (
-    <main>
+    <main className={classes.page}>
       <NewPostForm />
     </main>
   );

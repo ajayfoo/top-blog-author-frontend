@@ -1,0 +1,17 @@
+.page {
+  margin: 0 auto;
+  --content-width: clamp(45ch, 45vw, 75ch);
+  --inline-padding: var(--size-2);
+  inline-size: calc(var(--content-width) + (var(--inline-padding) * 2));
+  padding-inline: var(--inline-padding);
+}
+
+.form {
+  display: grid;
+  gap: var(--size-2);
+}
+
+.field {
+  display: grid;
+  gap: var(--size-1);
+}

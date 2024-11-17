@@ -3,7 +3,7 @@ import "./style.css";
 
 import { forwardRef, useEffect, useRef } from "react";
 
-const Editor = forwardRef((props, ref) => {
+const Editor = forwardRef(({ labelledBy }, ref) => {
   const containerRef = useRef(null);
   useEffect(() => {
     const container = containerRef.current;
@@ -17,7 +17,7 @@ const Editor = forwardRef((props, ref) => {
       container.textContent = "";
     };
   }, [ref]);
-  return <div ref={containerRef}></div>;
+  return <div aria-labelledby={labelledBy} ref={containerRef}></div>;
 });
 
 Editor.displayName = "Editor";
