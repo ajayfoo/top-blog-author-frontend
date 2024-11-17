@@ -1,6 +1,35 @@
 .posts-page {
+  margin-inline: var(--size-3);
+  display: grid;
+  gap: var(--size-1);
+}
+
+.posts {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15.625rem, 1fr));
   gap: var(--size-2);
-  margin-inline: var(--size-3);
+}
+
+.create-post-button {
+  justify-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-1);
+  background-color: var(--primary);
+  color: var(--on-primary);
+  text-decoration: none;
+  padding: var(--size-1) var(--size-2);
+  border-radius: var(--size-1);
+}
+.create-post-button:hover {
+  box-shadow: 3px 4px 5px 2px var(--shadow);
+}
+
+.icon {
+  inline-size: 1.5em;
+  fill: var(--on-primary);
+}
+
+.create-post-text {
+  flex-shrink: 0;
 }
