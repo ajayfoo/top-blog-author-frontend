@@ -3,3 +3,4 @@ import "./italicBlot.js";
 import "./blockquoteBlot.js";
 import "./headerBlot.js";
 import "./dividerBlot.js";
+import "./linkBlot.js";

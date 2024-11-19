@@ -44,6 +44,16 @@ const Toolbar = ({ quillRef }) => {
     );
     quillRef.current.setSelection(range.index + 2, Quill.sources.SILENT);
   };
+  const insertLink = () => {
+    const text = "I am a link";
+    const url = "https://www.archlinux.org";
+    const index = quillRef.current.getSelection(true).index;
+    quillRef.current.insertText(index, text, Quill.sources.USER);
+    quillRef.current.setSelection(index, text.length, Quill.sources.USER);
+    quillRef.current.format(SupportedBlots.LINK, url);
+    quillRef.current.setSelection(index + text.length, Quill.sources.SILENT);
+  };
+
   return (
     <div className="toolbar">
       <button onClick={toggleBold} type="button">
@@ -63,6 +73,9 @@ const Toolbar = ({ quillRef }) => {
       </button>
       <button onClick={insertDivider} type="button">
         Divider
+      </button>
+      <button onClick={insertLink} type="button">
+        Link
       </button>
     </div>
   );

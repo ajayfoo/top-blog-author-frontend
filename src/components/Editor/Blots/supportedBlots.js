@@ -4,6 +4,7 @@ const SupportedBlots = Object.freeze({
   BLOCKQUOTE: "blockquote",
   HEADER: "header",
   DIVIDER: "divider",
+  LINK: "link",
 });
 
 export default SupportedBlots;
