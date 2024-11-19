@@ -10,14 +10,14 @@ const Toolbar = ({ quillRef }) => {
     const currentFormat = quillRef.current.getFormat();
     quillRef.current.format(
       SupportedBlots.BOLD,
-      !Boolean(currentFormat[SupportedBlots.BOLD])
+      !currentFormat[SupportedBlots.BOLD]
     );
   };
   const toggleItalic = () => {
     const currentFormat = quillRef.current.getFormat();
     quillRef.current.format(
       SupportedBlots.ITALIC,
-      !Boolean(currentFormat[SupportedBlots.ITALIC])
+      !currentFormat[SupportedBlots.ITALIC]
     );
   };
   return (

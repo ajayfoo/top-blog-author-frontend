@@ -1,4 +1,4 @@
-.ql-editor {
+.editor .ql-editor {
   min-block-size: 15lh;
   background-color: var(--surface-container-high);
   color: var(--on-surface);
@@ -6,10 +6,10 @@
   border-radius: var(--size-3);
   padding: var(--size-2) var(--size-2);
 }
-.ql-editor:hover {
+.editor .ql-editor:hover {
   border-color: var(--outline-variant);
 }
-.ql-editor:focus {
+.editor .ql-editor:focus {
   outline: none;
   border-color: var(--outline);
 }
