@@ -33,6 +33,17 @@ const Toolbar = ({ quillRef }) => {
   const toggleHeading2 = () => {
     quillRef.current.format(SupportedBlots.HEADER, 2);
   };
+  const insertDivider = () => {
+    const range = quillRef.current.getSelection(true);
+    quillRef.current.insertText(range.index, "\n", Quill.sources.USER);
+    quillRef.current.insertEmbed(
+      range.index + 1,
+      SupportedBlots.DIVIDER,
+      true,
+      Quill.sources.USER
+    );
+    quillRef.current.setSelection(range.index + 2, Quill.sources.SILENT);
+  };
   return (
     <div className="toolbar">
       <button onClick={toggleBold} type="button">
@@ -49,6 +60,9 @@ const Toolbar = ({ quillRef }) => {
       </button>
       <button onClick={toggleHeading2} type="button">
         Heading 2
+      </button>
+      <button onClick={insertDivider} type="button">
+        Divider
       </button>
     </div>
   );

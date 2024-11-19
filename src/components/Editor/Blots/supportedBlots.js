@@ -3,6 +3,7 @@ const SupportedBlots = Object.freeze({
   ITALIC: "italic",
   BLOCKQUOTE: "blockquote",
   HEADER: "header",
+  DIVIDER: "divider",
 });
 
 export default SupportedBlots;
