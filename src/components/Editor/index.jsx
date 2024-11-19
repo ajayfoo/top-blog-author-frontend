@@ -20,6 +20,19 @@ const Toolbar = ({ quillRef }) => {
       !currentFormat[SupportedBlots.ITALIC]
     );
   };
+  const toggleBlockquote = () => {
+    const currentFormat = quillRef.current.getFormat();
+    quillRef.current.format(
+      SupportedBlots.BLOCKQUOTE,
+      !currentFormat[SupportedBlots.BLOCKQUOTE]
+    );
+  };
+  const toggleHeading1 = () => {
+    quillRef.current.format(SupportedBlots.HEADER, 1);
+  };
+  const toggleHeading2 = () => {
+    quillRef.current.format(SupportedBlots.HEADER, 2);
+  };
   return (
     <div className="toolbar">
       <button onClick={toggleBold} type="button">
@@ -27,6 +40,15 @@ const Toolbar = ({ quillRef }) => {
       </button>
       <button onClick={toggleItalic} type="button">
         Italic
+      </button>
+      <button onClick={toggleBlockquote} type="button">
+        Blockquote
+      </button>
+      <button onClick={toggleHeading1} type="button">
+        Heading 1
+      </button>
+      <button onClick={toggleHeading2} type="button">
+        Heading 2
       </button>
     </div>
   );
