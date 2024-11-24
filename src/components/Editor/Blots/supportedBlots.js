@@ -5,6 +5,7 @@ const SupportedBlots = Object.freeze({
   HEADER: "header",
   DIVIDER: "divider",
   LINK: "link",
+  IMAGE: "image",
 });
 
 export default SupportedBlots;

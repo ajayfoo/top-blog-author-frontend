@@ -189,6 +189,39 @@ LinkButton.propTypes = {
   quillRef: PropTypes.object,
 };
 
+const ImageButton = ({ quillRef }) => {
+  const handleChange = (e) => {
+    const url = URL.createObjectURL(e.target.files[0]);
+    const value = {
+      url,
+      alt: "",
+    };
+    const quill = quillRef.current;
+    const range = quill.getSelection(true);
+    quill.insertText(range.index, "\n", Quill.sources.USER);
+    quill.insertEmbed(
+      range.index + 1,
+      SupportedBlots.IMAGE,
+      value,
+      Quill.sources.USER
+    );
+    quill.setSelection(range.index + 2, Quill.sources.SILENT);
+  };
+  return (
+    <input
+      type="file"
+      onChange={handleChange}
+      name="image"
+      id="editor-image-input"
+      accept="image/*"
+    />
+  );
+};
+
+ImageButton.propTypes = {
+  quillRef: PropTypes.object,
+};
+
 const Toolbar = ({ quillRef }) => {
   return (
     <div className="toolbar">
@@ -198,6 +231,7 @@ const Toolbar = ({ quillRef }) => {
       <Heading1Button quillRef={quillRef} />
       <Heading2Button quillRef={quillRef} />
       <LinkButton quillRef={quillRef} />
+      <ImageButton quillRef={quillRef} />
     </div>
   );
 };

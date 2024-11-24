@@ -13,3 +13,8 @@
   outline: none;
   border-color: var(--outline);
 }
+
+.editor .ql-editor img {
+  max-inline-size: 100%;
+  max-block-size: 100%;
+}
