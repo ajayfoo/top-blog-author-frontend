@@ -2,21 +2,45 @@ import { useRef, useState } from "react";
 import Editor from "../Editor";
 import classes from "./style.module.css";
 
-const createNewPost = async (title, body, isHidden) => {
+const createNewPost = async (formData) => {
   const auth = localStorage.getItem("auth");
   const url = import.meta.env.VITE_API_URL + "/posts";
   const res = await fetch(url, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       Authorization: auth,
     },
-    body: JSON.stringify({ title, body, isHidden }),
+    body: formData,
   });
   if (!res.ok) return null;
   const postId = await res.text();
   return postId;
 };
+
+const getFormData = async (title, bodyContents, isHidden) => {
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("isHidden", isHidden);
+  const blobs = await getBlobs(bodyContents);
+  for (const blob of blobs) {
+    formData.append("blob", blob);
+  }
+  formData.append("body", JSON.stringify(bodyContents));
+  return formData;
+};
+
+const getBlobs = async (bodyContents) => {
+  const blobs = [];
+  for (const op of bodyContents.ops) {
+    if (!op.insert.image) continue;
+    const localUrl = op.insert.image.url;
+    const blob = await getBlobFromLocalUrl(localUrl);
+    blobs.push(blob);
+  }
+  return blobs;
+};
+
+const getBlobFromLocalUrl = (localUrl) => fetch(localUrl).then((r) => r.blob());
 
 const NewPostForm = () => {
   const [title, setTitle] = useState("");
@@ -28,9 +52,13 @@ const NewPostForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const body = JSON.stringify(quillRef.current.getContents());
+    const formData = await getFormData(
+      title,
+      quillRef.current.getContents(),
+      isHidden
+    );
     try {
-      const newPostId = createNewPost(title, body, isHidden);
+      const newPostId = await createNewPost(formData);
       if (!newPostId) throw new Error("Failed to create post");
     } catch (err) {
       console.error(err);
