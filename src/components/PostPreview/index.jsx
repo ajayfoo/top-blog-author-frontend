@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import classes from "./style.module.css";
 import { format } from "date-fns";
 
-const POST_PREVIEW_MAX_LENGTH = 20;
+const POST_PREVIEW_MAX_LENGTH = 40;
 
 const formattedBody = (quillContents) => {
   const parsedBody = JSON.parse(quillContents).ops;
@@ -27,8 +27,8 @@ function PostPreview({ post }) {
   const body = formattedBody(post.body);
   const title = (
     <>
-      {post.title.slice(0, 20)}
-      {post.title.length > 20 && <>&hellip;</>}
+      {post.title.slice(0, POST_PREVIEW_MAX_LENGTH)}
+      {post.title.length > POST_PREVIEW_MAX_LENGTH && <>&hellip;</>}
     </>
   );
   return (
