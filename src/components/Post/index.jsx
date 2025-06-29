@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import classes from "./style.module.css";
 import { format } from "date-fns";
-import { useOutletContext, useParams } from "react-router-dom";
+import { Link, useOutletContext, useParams } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import Quill from "quill/core";
 
@@ -22,12 +22,13 @@ function Post() {
       quillRef.current = null;
       container.textContent = "";
     };
-  }, []);
+  }, [post.body]);
 
   return (
     <section className={classes.post}>
       <header>
         <h1 className={classes.title}>{post.title}</h1>
+        <Link to={`/posts/${id}/edit`}>Edit Post</Link>
         <p className={classes["updated-at"]}>
           Last updated on <time dateTime={post.updatedAt}>{updatedAt}</time>
         </p>

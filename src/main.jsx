@@ -51,6 +51,10 @@ const router = createBrowserRouter([
         element: <PostPage />,
       },
       {
+        path: "/posts/:id/edit",
+        element: <NewPostPage />,
+      },
+      {
         path: "/account",
         element: <AccountPage />,
       },

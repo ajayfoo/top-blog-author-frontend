@@ -6,7 +6,10 @@ import "./Blots";
 import PropTypes from "prop-types";
 import Toolbar from "./Toolbar";
 
-const Editor = forwardRef(function Editor({ labelledBy }, ref) {
+const Editor = forwardRef(function Editor(
+  { labelledBy, initialContent = "" },
+  ref
+) {
   const containerRef = useRef(null);
   useEffect(() => {
     const container = containerRef.current;
@@ -15,11 +18,14 @@ const Editor = forwardRef(function Editor({ labelledBy }, ref) {
     );
 
     ref.current = new Quill(editorContainer);
+    if (initialContent) {
+      ref.current.setContents(JSON.parse(initialContent));
+    }
     return () => {
       ref.current = null;
       container.textContent = "";
     };
-  }, [ref]);
+  }, [ref, initialContent]);
   return (
     <>
       <div className="editor">
@@ -36,6 +42,7 @@ const Editor = forwardRef(function Editor({ labelledBy }, ref) {
 
 Editor.propTypes = {
   labelledBy: PropTypes.string,
+  initialContent: PropTypes.string,
 };
 
 Editor.displayName = "Editor";
