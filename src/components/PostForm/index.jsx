@@ -7,12 +7,15 @@ const getBlobs = async (bodyContents) => {
   const blobs = [];
   for (const op of bodyContents.ops) {
     if (!op.insert.image) continue;
-    const localUrl = op.insert.image.url;
-    const blob = await getBlobFromLocalUrl(localUrl);
+    const url = op.insert.image.url;
+    if (!isLocalUrl(url)) continue;
+    const blob = await getBlobFromLocalUrl(url);
     blobs.push(blob);
   }
   return blobs;
 };
+
+const isLocalUrl = (url) => url.startsWith("blob:http://localhost");
 
 const getBlobFromLocalUrl = (localUrl) => fetch(localUrl).then((r) => r.blob());
 
@@ -31,6 +34,19 @@ const createNewPost = async (formData) => {
   return postId;
 };
 
+const updatePost = async (formData, postId) => {
+  const auth = localStorage.getItem("auth");
+  const url = import.meta.env.VITE_API_URL + "/posts/" + postId;
+  const res = await fetch(url, {
+    method: "PATCH",
+    headers: {
+      Authorization: auth,
+    },
+    body: formData,
+  });
+  return res.ok;
+};
+
 const getFormData = async (title, bodyContents, isHidden) => {
   const formData = new FormData();
   formData.append("title", title);
@@ -46,12 +62,14 @@ const getFormData = async (title, bodyContents, isHidden) => {
 const PostForm = () => {
   const { postsMap } = useOutletContext();
   const { id: postId } = useParams();
-  const post = postsMap.get(parseInt(postId));
-  const initialTitle = post?.title ?? "";
-  const initialBody = post?.body ?? "";
+  const isExistingPost = !!postId;
+  const existingPost = isExistingPost ? postsMap.get(parseInt(postId)) : null;
+  const initialTitle = isExistingPost ? existingPost.title : "";
+  const initialBody = isExistingPost ? existingPost.body : "";
+  const initialIsHidden = isExistingPost ? existingPost.isHidden : "";
 
   const [title, setTitle] = useState(initialTitle);
-  const [isHidden, setIsHidden] = useState(true);
+  const [isHidden, setIsHidden] = useState(initialIsHidden);
   const quillRef = useRef(null);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -65,6 +83,11 @@ const PostForm = () => {
       isHidden
     );
     try {
+      if (isExistingPost) {
+        const updateSuccess = await updatePost(formData, postId);
+        if (!updateSuccess) throw new Error("Failed to update post");
+        return;
+      }
       const newPostId = await createNewPost(formData);
       if (!newPostId) throw new Error("Failed to create post");
     } catch (err) {
@@ -104,7 +127,9 @@ const PostForm = () => {
         />
         <label htmlFor={isHiddenFieldId}>Is hidden</label>
       </section>
-      <button className={classes["create-button"]}>Create</button>
+      <button className={classes["create-button"]}>
+        {isExistingPost ? "Update" : "Create"}
+      </button>
     </form>
   );
 };
