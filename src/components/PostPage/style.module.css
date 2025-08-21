@@ -1,3 +1,7 @@
 .post-page {
-  margin-inline: var(--size-3);
+  margin: 0 auto;
+  --content-width: clamp(30ch, 55vw, 75ch);
+  --inline-padding: var(--size-2);
+  inline-size: calc(var(--content-width) + (var(--inline-padding) * 2));
+  padding-inline: var(--inline-padding);
 }
