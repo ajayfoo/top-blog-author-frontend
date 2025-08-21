@@ -4,6 +4,20 @@ import { format } from "date-fns";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import Quill from "quill/core";
+import PencilIcon from "../Icons/PencilIcon";
+
+const EditPostButton = ({ editPostUrl }) => {
+  return (
+    <Link className={classes["edit-post-button"]} to={editPostUrl}>
+      <PencilIcon className={classes.icon} />
+      <span className={classes["edit-post-text"]}>Edit post</span>
+    </Link>
+  );
+};
+
+EditPostButton.propTypes = {
+  editPostUrl: PropTypes.string,
+};
 
 function Post() {
   const quillRef = useRef(null);
@@ -26,9 +40,9 @@ function Post() {
 
   return (
     <section className={classes.post}>
-      <header>
+      <header className={classes.header}>
         <h1 className={classes.title}>{post.title}</h1>
-        <Link to={`/posts/${id}/edit`}>Edit Post</Link>
+        <EditPostButton editPostUrl={`/posts/${id}/edit`} />
         <p className={classes["updated-at"]}>
           Last updated on <time dateTime={post.updatedAt}>{updatedAt}</time>
         </p>

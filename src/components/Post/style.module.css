@@ -1,3 +1,27 @@
+.edit-post-button {
+  justify-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-1);
+  background-color: var(--primary);
+  color: var(--on-primary);
+  text-decoration: none;
+  padding: var(--size-1) var(--size-2);
+  border-radius: var(--size-1);
+}
+
+.edit-post-button:hover {
+  box-shadow: 3px 4px 5px 2px var(--shadow);
+}
+
+.icon {
+  inline-size: 1.5em;
+  fill: var(--on-primary);
+}
+
+.create-post-text {
+  flex-shrink: 0;
+}
 .post {
   word-break: break-word;
 }
@@ -22,4 +46,9 @@
   line-height: 1.2lh;
   word-spacing: 0.15rem;
   letter-spacing: 0.05rem;
+}
+
+.header {
+  display: grid;
+  gap: var(--size-2);
 }
