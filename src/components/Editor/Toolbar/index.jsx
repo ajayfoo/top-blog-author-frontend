@@ -254,7 +254,6 @@ const ImageButton = ({ quillRef }) => {
         onChange={handleChange}
         name="image"
         accept="image/*"
-        size={60}
       />
     </label>
   );
