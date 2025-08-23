@@ -10,6 +10,7 @@ import DividerIcon from "../../Icons/DividerIcon.jsx";
 import H1Icon from "../../Icons/H1Icon.jsx";
 import H2Icon from "../../Icons/H2Icon.jsx";
 import LinkIcon from "../../Icons/LinkIcon.jsx";
+import ImageIcon from "../../Icons/ImageIcon.jsx";
 
 const BoldButton = ({ quillRef }) => {
   const toggleBold = () => {
@@ -245,13 +246,17 @@ const ImageButton = ({ quillRef }) => {
     quill.setSelection(range.index + 2, Quill.sources.SILENT);
   };
   return (
-    <input
-      type="file"
-      onChange={handleChange}
-      name="image"
-      id="editor-image-input"
-      accept="image/*"
-    />
+    <label className={classes.imageIconLabel}>
+      <ImageIcon className={classes.icon} />
+      <input
+        className={classes.imageInput}
+        type="file"
+        onChange={handleChange}
+        name="image"
+        accept="image/*"
+        size={60}
+      />
+    </label>
   );
 };
 

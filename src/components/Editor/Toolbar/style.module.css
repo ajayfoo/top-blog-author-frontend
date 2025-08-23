@@ -20,3 +20,25 @@
   min-inline-size: var(--width);
   fill: var(--secondary);
 }
+
+.imageIconLabel {
+  composes: button;
+  vertical-align: middle;
+  display: flex;
+  cursor: pointer;
+}
+.imageIconLabel:has(.imageInput:focus) {
+  outline: auto;
+}
+
+.imageInput {
+  top: 0;
+  width: 0.5px;
+  height: 0.5px;
+  padding: 0;
+  margin: 0;
+}
+
+.imageInput {
+  outline: unset;
+}
