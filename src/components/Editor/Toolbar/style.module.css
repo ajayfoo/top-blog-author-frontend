@@ -1,0 +1,22 @@
+.toolbar {
+  background-color: var(--surface-container-highest);
+  padding: var(--size-1) var(--size-2);
+  margin-block-end: var(--size-1);
+  border-radius: var(--size-2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, calc(1rem - 0.5vw), 1rem);
+}
+
+.button {
+  background-color: unset;
+  padding: calc(var(--size-1) / 3);
+  border: none;
+}
+
+.icon {
+  vertical-align: middle;
+  --width: clamp(1rem, 1.25vw, 1.25rem);
+  min-inline-size: var(--width);
+  fill: var(--secondary);
+}

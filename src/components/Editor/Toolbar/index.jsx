@@ -3,6 +3,13 @@ import SupportedBlots from "../Blots/supportedBlots.js";
 import Quill from "quill/core";
 import PropTypes from "prop-types";
 import AddLinkModal from "../AddLinkModal/index.jsx";
+import BoldIcon from "../../Icons/BoldIcon.jsx";
+import classes from "./style.module.css";
+import ItalicIcon from "../../Icons/ItalicIcon.jsx";
+import DividerIcon from "../../Icons/DividerIcon.jsx";
+import H1Icon from "../../Icons/H1Icon.jsx";
+import H2Icon from "../../Icons/H2Icon.jsx";
+import LinkIcon from "../../Icons/LinkIcon.jsx";
 
 const BoldButton = ({ quillRef }) => {
   const toggleBold = () => {
@@ -13,8 +20,13 @@ const BoldButton = ({ quillRef }) => {
     );
   };
   return (
-    <button onClick={toggleBold} type="button">
-      Bold
+    <button
+      title="Bold"
+      className={classes.button}
+      onClick={toggleBold}
+      type="button"
+    >
+      <BoldIcon className={classes.icon} />
     </button>
   );
 };
@@ -31,8 +43,13 @@ const ItalicButton = ({ quillRef }) => {
     );
   };
   return (
-    <button onClick={toggleItalic} type="button">
-      Italic
+    <button
+      title="italic"
+      className={classes.button}
+      onClick={toggleItalic}
+      type="button"
+    >
+      <ItalicIcon className={classes.icon} />
     </button>
   );
 };
@@ -71,8 +88,13 @@ const DividerButton = ({ quillRef }) => {
     quillRef.current.setSelection(range.index + 2, Quill.sources.SILENT);
   };
   return (
-    <button onClick={insertDivider} type="button">
-      Divider
+    <button
+      title="Divider"
+      className={classes.button}
+      onClick={insertDivider}
+      type="button"
+    >
+      <DividerIcon className={classes.icon} />
     </button>
   );
 };
@@ -110,8 +132,13 @@ const Heading1Button = ({ quillRef }) => {
     }
   };
   return (
-    <button onClick={toggleHeading1} type="button">
-      Heading 1
+    <button
+      title="Heading 1"
+      className={classes.button}
+      onClick={toggleHeading1}
+      type="button"
+    >
+      <H1Icon className={classes.icon} />
     </button>
   );
 };
@@ -129,8 +156,13 @@ const Heading2Button = ({ quillRef }) => {
     }
   };
   return (
-    <button onClick={toggleHeading2} type="button">
-      Heading 2
+    <button
+      title="Heading 2"
+      className={classes.button}
+      onClick={toggleHeading2}
+      type="button"
+    >
+      <H2Icon className={classes.icon} />
     </button>
   );
 };
@@ -169,8 +201,13 @@ const LinkButton = ({ quillRef }) => {
   };
   return (
     <>
-      <button onClick={showLinkModal} type="button">
-        Link
+      <button
+        title="Hyperlink"
+        className={classes.button}
+        onClick={showLinkModal}
+        type="button"
+      >
+        <LinkIcon className={classes.icon} />
       </button>
       <AddLinkModal
         show={showAddLinkModal}
@@ -224,7 +261,7 @@ ImageButton.propTypes = {
 
 const Toolbar = ({ quillRef }) => {
   return (
-    <div className="toolbar">
+    <div className={classes.toolbar}>
       <BoldButton quillRef={quillRef} />
       <ItalicButton quillRef={quillRef} />
       <DividerButton quillRef={quillRef} />

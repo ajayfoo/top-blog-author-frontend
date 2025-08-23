@@ -1,11 +1,11 @@
 .form {
   display: grid;
-  gap: var(--size-2);
+  gap: var(--size-3);
 }
 
 .field {
   display: grid;
-  gap: var(--size-1);
+  gap: var(--size-2);
 }
 .field > input,
 .field > textarea {
