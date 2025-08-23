@@ -14,6 +14,7 @@ import {
 import { getUserIfAuthorizedElseNull } from "./utils.js";
 import PostPage from "./components/PostPage/index.jsx";
 import NewPostPage from "./components/NewPostPage/index.jsx";
+import NotFoundPage from "./components/NotFoundPage/index.jsx";
 
 const redirectToHomePageIfAuthorized = async () => {
   const user = await getUserIfAuthorizedElseNull();
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
   {
     path: "*",
     loader: redirectToLoginPageIfUnAuthorized,
-    element: <ErrorPage />,
+    element: <NotFoundPage />,
     errorElement: <ErrorPage />,
   },
 ]);
