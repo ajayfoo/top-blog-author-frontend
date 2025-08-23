@@ -1,11 +1,13 @@
 .toolbar {
-  background-color: var(--surface-container-highest);
   padding: var(--size-1) var(--size-2);
+  background-color: var(--surface-container-highest);
   margin-block-end: var(--size-1);
   border-radius: var(--size-2);
   display: flex;
   flex-wrap: wrap;
   gap: clamp(0.5rem, calc(1rem - 0.5vw), 1rem);
+  justify-content: center;
+  justify-self: center;
 }
 
 .button {
