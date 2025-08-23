@@ -12,7 +12,7 @@ function App() {
     <div className={classes.app}>
       <MainNav />
       {postsMap ? (
-        <UserContext.Provider value={user}>
+        <UserContext.Provider value={{ user }}>
           <Outlet context={{ postsMap }} />
         </UserContext.Provider>
       ) : (
