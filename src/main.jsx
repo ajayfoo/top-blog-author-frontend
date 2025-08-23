@@ -70,6 +70,12 @@ const router = createBrowserRouter([
     loader: redirectToHomePageIfAuthorized,
     element: <LoginPage />,
   },
+  {
+    path: "*",
+    loader: redirectToLoginPageIfUnAuthorized,
+    element: <ErrorPage />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(

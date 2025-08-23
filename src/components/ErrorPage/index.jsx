@@ -10,7 +10,9 @@ function ErrorPage() {
       <article className={classes["error"]}>
         <header className={classes.header}>
           <ErrorIcon className={classes["error-icon"]} />
-          <h1 className={classes.heading}>{error.statusText}</h1>
+          <h1 className={classes.heading}>
+            {error?.statusText || "Page not found"}
+          </h1>
         </header>
         <GoToHome className={classes["go-to-home"]} />
       </article>
