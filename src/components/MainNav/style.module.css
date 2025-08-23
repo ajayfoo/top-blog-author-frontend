@@ -1,0 +1,40 @@
+.main-nav {
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.nav-items {
+  display: flex;
+  padding: var(--size-2) var(--size-3);
+  gap: calc(2 * var(--size-3));
+  font-size: var(--fs-1);
+  background-color: var(--surface-container);
+  border-radius: var(--size-2);
+  box-shadow: 2px 3px 5px var(--scrim);
+}
+
+.nav-items > a {
+  text-decoration: none;
+  color: var(--on-surface);
+  padding: var(--size-1) var(--size-2);
+  border: 1px solid transparent;
+  border-radius: var(--size-1);
+  display: flex;
+  align-items: center;
+  gap: var(--size-1);
+}
+
+.nav-items > a.active {
+  background-color: var(--surface-container-high);
+  border-color: var(--outline);
+}
+
+.nav-items > a:hover {
+  border-color: var(--outline);
+}
+
+.icon {
+  inline-size: 1.1em;
+  fill: var(--on-surface);
+}
