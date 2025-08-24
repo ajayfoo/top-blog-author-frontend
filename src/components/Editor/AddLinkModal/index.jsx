@@ -31,33 +31,37 @@ const AddLinkModal = ({
   };
 
   return (
-    <dialog onClose={onClose} ref={ref}>
-      <div className={classes.field}>
-        <label htmlFor={linkTextFieldId}>Text</label>
-        <input
-          type="text"
-          id={linkTextFieldId}
-          value={linkText}
-          onChange={onLinkTextChange}
-          onKeyDown={onEnterKeyPress}
-        />
+    <dialog className={classes.dialog} onClose={onClose} ref={ref}>
+      <div className={classes["dialog-inputs"]}>
+        <div className={classes.field}>
+          <label htmlFor={linkTextFieldId}>Text</label>
+          <input
+            type="text"
+            id={linkTextFieldId}
+            value={linkText}
+            onChange={onLinkTextChange}
+            onKeyDown={onEnterKeyPress}
+          />
+        </div>
+        <div className={classes.field}>
+          <label htmlFor={linkFieldId}>Full URL</label>
+          <input
+            type="text"
+            id={linkFieldId}
+            value={link}
+            onChange={onLinkChange}
+            onKeyDown={onEnterKeyPress}
+          />
+        </div>
+        <div className={classes["action-buttons"]}>
+          <button className={classes.cancel} type="button" onClick={onClose}>
+            Cancel
+          </button>
+          <button className={classes.create} type="button" onClick={onSubmit}>
+            Create
+          </button>
+        </div>
       </div>
-      <div className={classes.field}>
-        <label htmlFor={linkFieldId}>Full URL</label>
-        <input
-          type="text"
-          id={linkFieldId}
-          value={link}
-          onChange={onLinkChange}
-          onKeyDown={onEnterKeyPress}
-        />
-      </div>
-      <button type="button" onClick={onClose}>
-        Close
-      </button>
-      <button type="button" onClick={onSubmit}>
-        Submit
-      </button>
     </dialog>
   );
 };
