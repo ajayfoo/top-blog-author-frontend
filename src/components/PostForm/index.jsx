@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import Editor from "../Editor";
 import classes from "./style.module.css";
 import { useOutletContext, useParams } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const getBlobs = async (bodyContents) => {
   const blobs = [];
@@ -66,11 +67,12 @@ const PostForm = () => {
   const existingPost = isExistingPost ? postsMap.get(parseInt(postId)) : null;
   const initialTitle = isExistingPost ? existingPost.title : "";
   const initialBody = isExistingPost ? existingPost.body : "";
-  const initialIsHidden = isExistingPost ? existingPost.isHidden : "";
+  const initialIsHidden = isExistingPost ? existingPost.isHidden : false;
 
   const [title, setTitle] = useState(initialTitle);
   const [isHidden, setIsHidden] = useState(initialIsHidden);
   const quillRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleIsHiddenChange = (e) => setIsHidden(e.target.checked);
@@ -85,11 +87,19 @@ const PostForm = () => {
     try {
       if (isExistingPost) {
         const updateSuccess = await updatePost(formData, postId);
-        if (!updateSuccess) throw new Error("Failed to update post");
+        if (updateSuccess) {
+          navigate(`/posts/${postId}`);
+        } else {
+          throw new Error("Failed to update post");
+        }
         return;
       }
       const newPostId = await createNewPost(formData);
-      if (!newPostId) throw new Error("Failed to create post");
+      if (newPostId) {
+        // TODO: navigate to /posts/:postId
+      } else {
+        throw new Error("Failed to create post");
+      }
     } catch (err) {
       console.error(err);
     }
