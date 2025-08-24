@@ -16,6 +16,10 @@
   border: none;
 }
 
+.button.active > .icon {
+  fill: var(--primary);
+}
+
 .icon {
   vertical-align: middle;
   --width: clamp(1rem, 1.25vw, 1.25rem);

@@ -1,7 +1,7 @@
 import Quill from "quill/core";
 import "./style.css";
 import classes from "./style.module.css";
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useRef, useLayoutEffect } from "react";
 import "./Blots";
 import PropTypes from "prop-types";
 import Toolbar from "./Toolbar";
@@ -11,7 +11,7 @@ const Editor = forwardRef(function Editor(
   ref
 ) {
   const containerRef = useRef(null);
-  useEffect(() => {
+  useLayoutEffect(() => {
     const container = containerRef.current;
     const editorContainer = container.appendChild(
       container.ownerDocument.createElement("div")

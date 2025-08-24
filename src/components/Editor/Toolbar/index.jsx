@@ -11,19 +11,23 @@ import H1Icon from "../../Icons/H1Icon.jsx";
 import H2Icon from "../../Icons/H2Icon.jsx";
 import LinkIcon from "../../Icons/LinkIcon.jsx";
 import ImageIcon from "../../Icons/ImageIcon.jsx";
+import { useEffect } from "react";
 
 const BoldButton = ({ quillRef }) => {
+  const [isActive, setIsActive] = useIsActive(quillRef, SupportedBlots.BOLD);
+
   const toggleBold = () => {
     const currentFormat = quillRef.current.getFormat();
-    quillRef.current.format(
-      SupportedBlots.BOLD,
-      !currentFormat[SupportedBlots.BOLD]
-    );
+    const newIsActive = !currentFormat[SupportedBlots.BOLD];
+    quillRef.current.format(SupportedBlots.BOLD, newIsActive);
+    setIsActive(newIsActive);
   };
+
+  const buttonClassName = `${classes.button} ${isActive ? classes.active : ""}`;
   return (
     <button
       title="Bold"
-      className={classes.button}
+      className={buttonClassName}
       onClick={toggleBold}
       type="button"
     >
@@ -33,20 +37,23 @@ const BoldButton = ({ quillRef }) => {
 };
 BoldButton.propTypes = {
   quillRef: PropTypes.object,
+  isActive: PropTypes.bool,
 };
 
 const ItalicButton = ({ quillRef }) => {
+  const [isActive, setIsActive] = useIsActive(quillRef, SupportedBlots.ITALIC);
+
   const toggleItalic = () => {
     const currentFormat = quillRef.current.getFormat();
-    quillRef.current.format(
-      SupportedBlots.ITALIC,
-      !currentFormat[SupportedBlots.ITALIC]
-    );
+    const newIsActive = !currentFormat[SupportedBlots.ITALIC];
+    quillRef.current.format(SupportedBlots.ITALIC, newIsActive);
+    setIsActive(newIsActive);
   };
+  const buttonClassName = `${classes.button} ${isActive ? classes.active : ""}`;
   return (
     <button
       title="italic"
-      className={classes.button}
+      className={buttonClassName}
       onClick={toggleItalic}
       type="button"
     >
@@ -59,15 +66,23 @@ ItalicButton.propTypes = {
 };
 
 const BlockquoteButton = ({ quillRef }) => {
+  const [isActive, setIsActive] = useIsActive(
+    quillRef,
+    SupportedBlots.BLOCKQUOTE
+  );
   const toggleBlockquote = () => {
     const currentFormat = quillRef.current.getFormat();
-    quillRef.current.format(
-      SupportedBlots.BLOCKQUOTE,
-      !currentFormat[SupportedBlots.BLOCKQUOTE]
-    );
+    const newIsActive = !currentFormat[SupportedBlots.BLOCKQUOTE];
+    quillRef.current.format(SupportedBlots.BLOCKQUOTE, newIsActive);
+    setIsActive(newIsActive);
   };
+  const buttonClassName = `${classes.button} ${isActive ? classes.active : ""}`;
   return (
-    <button onClick={toggleBlockquote} type="button">
+    <button
+      className={buttonClassName}
+      onClick={toggleBlockquote}
+      type="button"
+    >
       Blockquote
     </button>
   );
@@ -261,6 +276,25 @@ const ImageButton = ({ quillRef }) => {
 
 ImageButton.propTypes = {
   quillRef: PropTypes.object,
+};
+
+const useIsActive = (quillRef, blot) => {
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    const quill = quillRef.current;
+    if (!quill) return;
+    const handler = () => {
+      const currentFormat = quillRef.current.getFormat();
+      const newIsActive = !!currentFormat[blot];
+      setIsActive(newIsActive);
+    };
+    quill.on("editor-change", handler);
+    return () => {
+      quill.off(handler);
+    };
+  }, [quillRef, blot]);
+  return [isActive, setIsActive];
 };
 
 const Toolbar = ({ quillRef }) => {
