@@ -23,6 +23,12 @@ const AddLinkModal = ({
 
   const linkTextFieldId = "add-link-modal-link-text-field";
   const linkFieldId = "add-link-modal-link-field";
+  const onEnterKeyPress = (e) => {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      return false;
+    }
+  };
 
   return (
     <dialog onClose={onClose} ref={ref}>
@@ -33,6 +39,7 @@ const AddLinkModal = ({
           id={linkTextFieldId}
           value={linkText}
           onChange={onLinkTextChange}
+          onKeyDown={onEnterKeyPress}
         />
       </div>
       <div className={classes.field}>
@@ -42,6 +49,7 @@ const AddLinkModal = ({
           id={linkFieldId}
           value={link}
           onChange={onLinkChange}
+          onKeyDown={onEnterKeyPress}
         />
       </div>
       <button type="button" onClick={onClose}>
