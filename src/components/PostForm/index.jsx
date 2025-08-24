@@ -31,8 +31,8 @@ const createNewPost = async (formData) => {
     body: formData,
   });
   if (!res.ok) return null;
-  const postId = await res.text();
-  return postId;
+  const post = await res.json();
+  return post;
 };
 
 const updatePost = async (formData, postId) => {
@@ -61,7 +61,7 @@ const getFormData = async (title, bodyContents, isHidden) => {
 };
 
 const PostForm = () => {
-  const { postsMap } = useOutletContext();
+  const { postsMap, addPost } = useOutletContext();
   const { id: postId } = useParams();
   const isExistingPost = !!postId;
   const existingPost = isExistingPost ? postsMap.get(parseInt(postId)) : null;
@@ -94,9 +94,10 @@ const PostForm = () => {
         }
         return;
       }
-      const newPostId = await createNewPost(formData);
-      if (newPostId) {
-        // TODO: navigate to /posts/:postId
+      const newPost = await createNewPost(formData);
+      if (newPost) {
+        addPost(newPost);
+        navigate(`/posts/${newPost.id}`);
       } else {
         throw new Error("Failed to create post");
       }

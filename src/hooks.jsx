@@ -35,18 +35,6 @@ useFetchData.propTypes = {
   url: PropTypes.string,
 };
 
-const usePostsMap = () => {
-  const [posts] = useFetchData(import.meta.env.VITE_API_URL + "/posts");
-  if (!posts) {
-    return null;
-  }
-  const postsMap = new Map();
-  posts.forEach((p) => {
-    postsMap.set(p.id, p);
-  });
-  return postsMap;
-};
-
 const useComments = (postId) => {
   const [comments, setComments] = useFetchData(
     import.meta.env.VITE_API_URL + "/posts/" + postId + "/comments"
@@ -99,4 +87,4 @@ const useUser = () => {
   return user;
 };
 
-export { usePostsMap, useComments, useLocalStorage, useFetchUser, useUser };
+export { useComments, useLocalStorage, useFetchUser, useUser, useFetchData };
