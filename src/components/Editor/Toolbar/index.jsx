@@ -118,39 +118,22 @@ DividerButton.propTypes = {
   quillRef: PropTypes.object,
 };
 
-const removeHeaderFormat = (quillRef) => {
-  const quill = quillRef.current;
-  const { index } = quill.getSelection(true);
-  const [line] = quill.getLine(index);
-  const delta = line.cache.delta;
-  const length = line.cache.length;
-  const ops = delta.ops;
-  const lastOp = ops[ops.length - 1];
-  delete lastOp.attributes.header;
-  const startIndex = index - length + 1;
-  quill.deleteText(startIndex, length);
-  let i = startIndex;
-  const updatedOps = ops.slice(0, ops.length - 1);
-  for (const op of updatedOps) {
-    quill.insertText(i, op.insert, op.attributes);
-    i += op.insert.length;
-  }
-  quill.setSelection(i);
-};
-
 const Heading1Button = ({ quillRef }) => {
+  const [isActive, setIsActive] = useIsActive(
+    quillRef,
+    SupportedBlots.HEADING_1
+  );
   const toggleHeading1 = () => {
     const currentFormat = quillRef.current.getFormat();
-    if (!currentFormat[SupportedBlots.HEADER]) {
-      quillRef.current.format(SupportedBlots.HEADER, 1);
-    } else {
-      removeHeaderFormat(quillRef);
-    }
+    const newIsActive = !currentFormat[SupportedBlots.HEADING_1];
+    quillRef.current.format(SupportedBlots.HEADING_1, newIsActive);
+    setIsActive(newIsActive);
   };
+  const buttonClassName = `${classes.button} ${isActive ? classes.active : ""}`;
   return (
     <button
       title="Heading 1"
-      className={classes.button}
+      className={buttonClassName}
       onClick={toggleHeading1}
       type="button"
     >
@@ -163,18 +146,21 @@ Heading1Button.propTypes = {
 };
 
 const Heading2Button = ({ quillRef }) => {
+  const [isActive, setIsActive] = useIsActive(
+    quillRef,
+    SupportedBlots.HEADING_2
+  );
   const toggleHeading2 = () => {
     const currentFormat = quillRef.current.getFormat();
-    if (!currentFormat[SupportedBlots.HEADER]) {
-      quillRef.current.format(SupportedBlots.HEADER, 2);
-    } else {
-      removeHeaderFormat(quillRef);
-    }
+    const newIsActive = !currentFormat[SupportedBlots.HEADING_2];
+    quillRef.current.format(SupportedBlots.HEADING_2, newIsActive);
+    setIsActive(newIsActive);
   };
+  const buttonClassName = `${classes.button} ${isActive ? classes.active : ""}`;
   return (
     <button
       title="Heading 2"
-      className={classes.button}
+      className={buttonClassName}
       onClick={toggleHeading2}
       type="button"
     >
