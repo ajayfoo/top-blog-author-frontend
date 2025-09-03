@@ -20,12 +20,22 @@ function App() {
     newPosts.push(post);
     setPosts(newPosts);
   };
+  const replacePost = (post) => {
+    const clonedPosts = structuredClone(posts);
+    const targetPostIndex = clonedPosts.findIndex((p) => p.Id === post.Id);
+    const updatedPosts = [
+      clonedPosts.slice(0, targetPostIndex),
+      post,
+      clonedPosts.slice(targetPostIndex + 1),
+    ];
+    setPosts(updatedPosts);
+  };
   return (
     <div className={classes.app}>
       <MainNav />
       {posts ? (
         <UserContext.Provider value={{ user }}>
-          <Outlet context={{ postsMap, addPost }} />
+          <Outlet context={{ postsMap, addPost, replacePost }} />
         </UserContext.Provider>
       ) : (
         <div className={classes.center}>

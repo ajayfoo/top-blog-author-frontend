@@ -45,7 +45,9 @@ const updatePost = async (formData, postId) => {
     },
     body: formData,
   });
-  return res.ok;
+  if (!res.ok) return null;
+  const post = await res.json();
+  return post;
 };
 
 const getFormData = async (title, bodyContents, isHidden) => {
@@ -61,7 +63,7 @@ const getFormData = async (title, bodyContents, isHidden) => {
 };
 
 const PostForm = () => {
-  const { postsMap, addPost } = useOutletContext();
+  const { postsMap, addPost, replacePost } = useOutletContext();
   const { id: postId } = useParams();
   const isExistingPost = !!postId;
   const existingPost = isExistingPost ? postsMap.get(parseInt(postId)) : null;
@@ -86,8 +88,9 @@ const PostForm = () => {
     );
     try {
       if (isExistingPost) {
-        const updateSuccess = await updatePost(formData, postId);
-        if (updateSuccess) {
+        const updatedPost = await updatePost(formData, postId);
+        if (updatedPost) {
+          replacePost(updatedPost);
           navigate(`/posts/${postId}`);
         } else {
           throw new Error("Failed to update post");
