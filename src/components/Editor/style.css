@@ -23,10 +23,10 @@
   max-block-size: 100%;
 }
 
-h1 {
+.ql-editor h1 {
   font-size: 2rem;
 }
 
-h2 {
+.ql-editor h2 {
   font-size: 1.5rem;
 }
