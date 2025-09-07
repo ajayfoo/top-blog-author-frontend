@@ -30,3 +30,10 @@
 .ql-editor h2 {
   font-size: 1.5rem;
 }
+
+.ql-editor blockquote {
+  margin: 0;
+  margin-inline-start: 10px;
+  padding-inline-start: 10px;
+  border-inline-start: 3px solid;
+}

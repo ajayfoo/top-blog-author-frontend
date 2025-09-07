@@ -12,6 +12,7 @@ import H2Icon from "../../Icons/H2Icon.jsx";
 import LinkIcon from "../../Icons/LinkIcon.jsx";
 import ImageIcon from "../../Icons/ImageIcon.jsx";
 import { useEffect } from "react";
+import BlockquoteIcon from "../../Icons/Blockquote.jsx";
 
 const BoldButton = ({ quillRef }) => {
   const [isActive, setIsActive] = useIsActive(quillRef, SupportedBlots.BOLD);
@@ -79,11 +80,12 @@ const BlockquoteButton = ({ quillRef }) => {
   const buttonClassName = `${classes.button} ${isActive ? classes.active : ""}`;
   return (
     <button
+      title="blockquote"
       className={buttonClassName}
       onClick={toggleBlockquote}
       type="button"
     >
-      Blockquote
+      <BlockquoteIcon className={classes.icon} />
     </button>
   );
 };
@@ -313,6 +315,7 @@ const Toolbar = ({ quillRef }) => {
       <ItalicButton quillRef={quillRef} />
       <Heading1Button quillRef={quillRef} />
       <Heading2Button quillRef={quillRef} />
+      <BlockquoteButton quillRef={quillRef} />
       <VerticalSeparator />
       <LinkButton quillRef={quillRef} />
       <DividerButton quillRef={quillRef} />
