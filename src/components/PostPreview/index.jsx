@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import classes from "./style.module.css";
 import { format } from "date-fns";
+import PublishUnpublishButton from "../PublishUnpublishButton";
 
 const POST_PREVIEW_MAX_LENGTH = 40;
 
@@ -32,6 +33,7 @@ const formattedBody = (quillContents) => {
 };
 
 function PostPreview({ post }) {
+  const { replacePost } = useOutletContext();
   const updatedAt = format(post.updatedAt, "d MMM yyyy");
   const body = formattedBody(post.body);
   const title = (
@@ -40,6 +42,31 @@ function PostPreview({ post }) {
       {post.title.length > POST_PREVIEW_MAX_LENGTH && <>&hellip;</>}
     </>
   );
+
+  const toggleIsHidden = async () => {
+    const auth = localStorage.getItem("auth");
+    const url =
+      import.meta.env.VITE_API_URL + "/posts/" + post.id + "/isHidden";
+    const body = JSON.stringify({ isHidden: !post.isHidden });
+    try {
+      const res = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          Authorization: auth,
+          "Content-Type": "application/json",
+        },
+        body,
+      });
+      if (res.ok) {
+        const updatedPost = structuredClone(post);
+        updatedPost.isHidden = !updatedPost.isHidden;
+        replacePost(updatedPost);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <Link className={classes["post-link"]} to={"/posts/" + post.id}>
       <article className={classes["post-preview"]}>
@@ -48,7 +75,13 @@ function PostPreview({ post }) {
           <h2 className={classes.title}>{title}</h2>
           <p className={classes.body}>{body}</p>
         </div>
-        <p className={classes.author}>{post.author.username}</p>
+        <footer className={classes.footer}>
+          <p className={classes.author}>{post.author.username}</p>
+          <PublishUnpublishButton
+            isHidden={post.isHidden}
+            onClick={toggleIsHidden}
+          />
+        </footer>
       </article>
     </Link>
   );

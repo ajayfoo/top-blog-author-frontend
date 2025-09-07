@@ -22,13 +22,11 @@ function App() {
   };
   const replacePost = (post) => {
     const clonedPosts = structuredClone(posts);
-    const targetPostIndex = clonedPosts.findIndex((p) => p.Id === post.Id);
-    const updatedPosts = [
-      clonedPosts.slice(0, targetPostIndex),
-      post,
-      clonedPosts.slice(targetPostIndex + 1),
-    ];
-    setPosts(updatedPosts);
+    const targetPostIndex = clonedPosts.findIndex((p) => p.id === post.id);
+    if (targetPostIndex !== -1) {
+      clonedPosts[targetPostIndex] = post;
+    }
+    setPosts(clonedPosts);
   };
   return (
     <div className={classes.app}>

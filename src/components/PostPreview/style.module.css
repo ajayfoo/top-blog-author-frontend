@@ -38,3 +38,9 @@
   color: var(--secondary);
   font-weight: 600;
 }
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
