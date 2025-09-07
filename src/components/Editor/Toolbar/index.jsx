@@ -183,6 +183,9 @@ const LinkButton = ({ quillRef }) => {
     setLink(e.target.value);
   };
   const showLinkModal = () => {
+    const selection = quillRef.current.getSelection(true);
+    const text = quillRef.current.getText(selection.index, selection.length);
+    setLinkText(text);
     setShowAddLinkModal(true);
   };
   const handleCloseModal = () => {
@@ -191,12 +194,21 @@ const LinkButton = ({ quillRef }) => {
     setLink("");
   };
   const handleAddLinkModalSubmit = () => {
-    const index = quillRef.current.getSelection(true).index;
-    quillRef.current.insertText(index, linkText, Quill.sources.USER);
-    quillRef.current.setSelection(index, linkText.length, Quill.sources.USER);
+    const selection = quillRef.current.getSelection(true);
+    quillRef.current.deleteText(
+      selection.index,
+      selection.length,
+      Quill.sources.USER
+    );
+    quillRef.current.insertText(selection.index, linkText, Quill.sources.USER);
+    quillRef.current.setSelection(
+      selection.index,
+      linkText.length,
+      Quill.sources.USER
+    );
     quillRef.current.format(SupportedBlots.LINK, link);
     quillRef.current.setSelection(
-      index + linkText.length,
+      selection.index + linkText.length,
       Quill.sources.SILENT
     );
     handleCloseModal();
