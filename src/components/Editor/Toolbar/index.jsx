@@ -297,15 +297,25 @@ const useIsActive = (quillRef, blot) => {
   return [isActive, setIsActive];
 };
 
+const VerticalSeparator = () => {
+  return (
+    <span
+      aria-label="separator"
+      className={classes["vertical-separator"]}
+    ></span>
+  );
+};
+
 const Toolbar = ({ quillRef }) => {
   return (
     <div className={classes.toolbar}>
       <BoldButton quillRef={quillRef} />
       <ItalicButton quillRef={quillRef} />
-      <DividerButton quillRef={quillRef} />
       <Heading1Button quillRef={quillRef} />
       <Heading2Button quillRef={quillRef} />
+      <VerticalSeparator />
       <LinkButton quillRef={quillRef} />
+      <DividerButton quillRef={quillRef} />
       <ImageButton quillRef={quillRef} />
     </div>
   );
