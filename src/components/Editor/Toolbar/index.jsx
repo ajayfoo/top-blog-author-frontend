@@ -283,7 +283,9 @@ const useIsActive = (quillRef, blot) => {
     const quill = quillRef.current;
     if (!quill) return;
     const handler = () => {
-      const currentFormat = quillRef.current.getFormat();
+      const selection = quill.getSelection();
+      if (!selection) return;
+      const currentFormat = quill.getFormat(selection.index, selection.length);
       const newIsActive = !!currentFormat[blot];
       setIsActive(newIsActive);
     };
