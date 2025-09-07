@@ -111,7 +111,7 @@ const PostForm = () => {
 
   const titleFieldId = "new-post-form-title";
   const bodyLabelId = "new-post-form-body";
-  const isHiddenFieldId = "new-post-form-is-hidden";
+  const publishFieldId = "new-post-form-publish";
   return (
     <form className={classes.form} onSubmit={handleSubmit}>
       <section className={classes.field}>
@@ -135,11 +135,11 @@ const PostForm = () => {
       <section className={classes["is-hidden-field"]}>
         <input
           type="checkbox"
-          id={isHiddenFieldId}
+          id={publishFieldId}
           onChange={handleIsHiddenChange}
           checked={isHidden}
         />
-        <label htmlFor={isHiddenFieldId}>Is hidden</label>
+        <label htmlFor={publishFieldId}>Publish</label>
       </section>
       <button className={classes["create-button"]}>
         {isExistingPost ? "Update" : "Create"}
