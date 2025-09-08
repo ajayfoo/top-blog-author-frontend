@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classes from "./style.module.css";
 import { format } from "date-fns";
 import PublishUnpublishButton from "../PublishUnpublishButton";
@@ -33,7 +33,6 @@ const formattedBody = (quillContents) => {
 };
 
 function PostPreview({ post }) {
-  const { replacePost } = useOutletContext();
   const updatedAt = format(post.updatedAt, "d MMM yyyy");
   const body = formattedBody(post.body);
   const title = (
@@ -42,30 +41,6 @@ function PostPreview({ post }) {
       {post.title.length > POST_PREVIEW_MAX_LENGTH && <>&hellip;</>}
     </>
   );
-
-  const toggleIsHidden = async () => {
-    const auth = localStorage.getItem("auth");
-    const url =
-      import.meta.env.VITE_API_URL + "/posts/" + post.id + "/isHidden";
-    const body = JSON.stringify({ isHidden: !post.isHidden });
-    try {
-      const res = await fetch(url, {
-        method: "PATCH",
-        headers: {
-          Authorization: auth,
-          "Content-Type": "application/json",
-        },
-        body,
-      });
-      if (res.ok) {
-        const updatedPost = structuredClone(post);
-        updatedPost.isHidden = !updatedPost.isHidden;
-        replacePost(updatedPost);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   return (
     <Link className={classes["post-link"]} to={"/posts/" + post.id}>
@@ -77,10 +52,7 @@ function PostPreview({ post }) {
         </div>
         <footer className={classes.footer}>
           <p className={classes.author}>{post.author.username}</p>
-          <PublishUnpublishButton
-            isHidden={post.isHidden}
-            onClick={toggleIsHidden}
-          />
+          <PublishUnpublishButton post={post} />
         </footer>
       </article>
     </Link>
