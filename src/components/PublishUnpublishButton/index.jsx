@@ -1,8 +1,12 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import Spinner from "./components/Spinner";
+import classes from "./style.module.css";
 
 const PublishUnpublishButton = ({ post }) => {
   const { replacePost } = useOutletContext();
+  const [loading, setIsLoading] = useState(false);
   const buttonLabel = post.isHidden ? "Publish" : "Unpublish";
   const handleClick = async (e) => {
     e.preventDefault();
@@ -14,6 +18,7 @@ const PublishUnpublishButton = ({ post }) => {
       import.meta.env.VITE_API_URL + "/posts/" + post.id + "/isHidden";
     const body = JSON.stringify({ isHidden: !post.isHidden });
     try {
+      setIsLoading(true);
       const res = await fetch(url, {
         method: "PATCH",
         headers: {
@@ -29,11 +34,18 @@ const PublishUnpublishButton = ({ post }) => {
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
-    <button onClick={handleClick} type="button">
-      {buttonLabel}
+    <button
+      className={loading ? classes["button-with-spinner"] : classes["button"]}
+      disabled={loading}
+      onClick={handleClick}
+      type="button"
+    >
+      {loading ? <Spinner /> : buttonLabel}
     </button>
   );
 };

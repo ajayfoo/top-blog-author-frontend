@@ -1,0 +1,26 @@
+.spinner {
+  animation-name: spin;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  inline-size: fit-content;
+}
+
+.svg {
+  display: block;
+  inline-size: 1lh;
+  block-size: 1lh;
+}
+
+.svg-g {
+  stroke: var(--on-primary-container);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0turn);
+  }
+  to {
+    transform: rotate(1turn);
+  }
+}

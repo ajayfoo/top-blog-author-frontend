@@ -1,0 +1,11 @@
+.button,
+.button-with-spinner {
+  border: none;
+  border-radius: var(--size-1);
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+  padding: var(--size-1) var(--size-2);
+}
+.button-with-spinner {
+  padding-inline: var(--size-1);
+}
