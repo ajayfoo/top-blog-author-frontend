@@ -3,7 +3,7 @@
   margin-block-start: var(--main-nav-top-gap);
   display: flex;
   flex-direction: column;
-  gap: var(--size-2);
+  gap: var(--size-2-rev);
 }
 
 .app > :first-child {
