@@ -23,7 +23,12 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  gap: var(--size-1);
   align-items: flex-start;
+}
+
+.no-body {
+  font-style: italic;
 }
 
 .body {

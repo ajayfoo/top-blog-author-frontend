@@ -25,6 +25,9 @@ const formattedBody = (quillContents) => {
       break;
     }
   }
+  if (bodyContent === "\n") {
+    return <span className={classes["no-body"]}>[No body]</span>;
+  }
   return (
     <>
       {bodyContent.slice(0, POST_PREVIEW_BODY_MAX_LENGTH)}
