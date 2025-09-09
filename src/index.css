@@ -17,7 +17,7 @@
   --size-2: clamp(0.5rem, 1.5vw, 1rem);
   --size-3: clamp(1rem, 3vw, 2rem);
 
-  --fs-1: clamp(1.25rem, 1.5vw, 1.5rem);
+  --fs-1: clamp(1.15rem, 1.5vw, 1.25rem);
   --size-1-rev: clamp(0.25rem, calc(0.5rem - 0.25vw), 0.5rem);
   --size-2-rev: clamp(0.5rem, calc(1rem - 0.5vw), 1rem);
 }
