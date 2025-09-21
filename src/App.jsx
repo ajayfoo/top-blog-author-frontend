@@ -4,8 +4,10 @@ import MainNav from "./components/MainNav";
 import classes from "./style.module.css";
 import Spinner from "./components/Spinner";
 import { UserContext } from "./contexts";
+import { usePageTitle } from "../../top-blog-viewer-frontend/src/hooks.jsx";
 
 function App() {
+  usePageTitle("TOP Blog");
   const [posts, setPosts] = useFetchData(
     import.meta.env.VITE_API_URL + "/posts"
   );

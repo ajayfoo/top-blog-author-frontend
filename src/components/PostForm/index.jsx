@@ -3,6 +3,7 @@ import Editor from "../Editor";
 import classes from "./style.module.css";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { usePageTitle } from "../../../../top-blog-viewer-frontend/src/hooks";
 
 const getBlobs = async (bodyContents) => {
   const blobs = [];
@@ -66,6 +67,7 @@ const PostForm = () => {
   const { postsMap, addPost, replacePost } = useOutletContext();
   const { id: postId } = useParams();
   const isExistingPost = !!postId;
+  usePageTitle(isExistingPost ? "Update Post" : "New Post");
   const existingPost = isExistingPost ? postsMap.get(parseInt(postId)) : null;
   const initialTitle = isExistingPost ? existingPost.title : "";
   const initialBody = isExistingPost ? existingPost.body : "";

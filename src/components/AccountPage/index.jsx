@@ -5,8 +5,10 @@ import { useUser } from "../../hooks.jsx";
 import { Navigate, useNavigate } from "react-router-dom";
 import Spinner from "../Spinner/index.jsx";
 import { UserStatus } from "../../utils.js";
+import { usePageTitle } from "../../../../top-blog-viewer-frontend/src/hooks.jsx";
 
 function AccountPage() {
+  usePageTitle("Account");
   const { user } = useUser();
   const confirmModalRef = useRef(null);
   const navigate = useNavigate();
