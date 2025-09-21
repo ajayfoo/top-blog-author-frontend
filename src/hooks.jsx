@@ -87,4 +87,20 @@ const useUser = () => {
   return user;
 };
 
-export { useComments, useLocalStorage, useFetchUser, useUser, useFetchData };
+const usePageTitle = (title) => {
+  useEffect(() => {
+    document.title = title;
+    return () => {
+      document.title = "TOP Blog";
+    };
+  }, [title]);
+};
+
+export {
+  useComments,
+  useLocalStorage,
+  useFetchUser,
+  useUser,
+  useFetchData,
+  usePageTitle,
+};

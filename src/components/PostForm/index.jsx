@@ -3,7 +3,7 @@ import Editor from "../Editor";
 import classes from "./style.module.css";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { usePageTitle } from "../../../../top-blog-viewer-frontend/src/hooks";
+import { usePageTitle } from "../../hooks";
 
 const getBlobs = async (bodyContents) => {
   const blobs = [];

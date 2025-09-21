@@ -2,7 +2,7 @@ import { Link, useOutletContext } from "react-router-dom";
 import PostPreview from "../PostPreview";
 import classes from "./style.module.css";
 import PlusIcon from "../Icons/PlusIcon.jsx";
-import { usePageTitle } from "../../../../top-blog-viewer-frontend/src/hooks.jsx";
+import { usePageTitle } from "../../hooks.jsx";
 
 const CreatePostButton = () => {
   return (

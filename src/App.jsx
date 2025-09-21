@@ -1,10 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { useFetchData, useFetchUser } from "./hooks.jsx";
+import { useFetchData, useFetchUser, usePageTitle } from "./hooks.jsx";
 import MainNav from "./components/MainNav";
 import classes from "./style.module.css";
 import Spinner from "./components/Spinner";
 import { UserContext } from "./contexts";
-import { usePageTitle } from "../../top-blog-viewer-frontend/src/hooks.jsx";
 
 function App() {
   usePageTitle("TOP Blog");

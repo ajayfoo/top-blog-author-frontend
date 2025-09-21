@@ -3,7 +3,7 @@ import Post from "../Post";
 import classes from "./style.module.css";
 import CommentsSection from "../CommentsSection";
 import { useOutletContext, useParams } from "react-router-dom";
-import { usePageTitle } from "../../../../top-blog-viewer-frontend/src/hooks";
+import { usePageTitle } from "../../hooks";
 
 function PostPage() {
   const { postsMap } = useOutletContext();

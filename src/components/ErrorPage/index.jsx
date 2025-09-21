@@ -2,7 +2,7 @@ import { useRouteError } from "react-router-dom";
 import GoToHome from "../GoToHome";
 import classes from "./style.module.css";
 import ErrorIcon from "../Icons/ErrorIcon";
-import { usePageTitle } from "../../../../top-blog-viewer-frontend/src/hooks";
+import { usePageTitle } from "../../hooks";
 
 function ErrorPage() {
   usePageTitle("Error");
