@@ -10,6 +10,7 @@
   border-radius: var(--size-3);
   padding: var(--size-2) var(--size-2);
   display: grid;
+  align-content: start;
 }
 .editor .ql-editor:hover {
   border-color: var(--outline-variant);

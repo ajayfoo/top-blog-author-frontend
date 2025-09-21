@@ -1,5 +1,6 @@
 .ql-editor {
   display: grid;
+  align-content: start;
 }
 
 .ql-editor img {
