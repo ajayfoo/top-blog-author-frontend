@@ -139,7 +139,7 @@ const PostForm = () => {
           onChange={handleIsHiddenChange}
           checked={isHidden}
         />
-        <label htmlFor={publishFieldId}>Publish</label>
+        <label htmlFor={publishFieldId}>Unpublish</label>
       </section>
       <button className={classes["create-button"]}>
         {isExistingPost ? "Update" : "Create"}
