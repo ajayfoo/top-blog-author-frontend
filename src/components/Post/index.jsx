@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import classes from "./style.module.css";
+import "./style.css";
 import { format } from "date-fns";
 import { Link, useOutletContext, useParams } from "react-router-dom";
 import { useEffect, useRef } from "react";

@@ -27,7 +27,6 @@
 }
 .post img {
   max-inline-size: 100%;
-  max-block-size: auto;
 }
 .post > header {
   margin-block-end: var(--size-2);
