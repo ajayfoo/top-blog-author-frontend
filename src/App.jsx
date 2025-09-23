@@ -31,7 +31,7 @@ function App() {
     }
     setPosts(clonedPosts);
   };
-  const isEditPostPath = /\/posts\/[1-9]*\/edit/.test(location?.pathname);
+  const isEditPostPath = /\/posts\/[0-9]*\/edit/.test(location?.pathname);
   const giveMainNavStaticPosition =
     location?.pathname === "/posts/new" || isEditPostPath;
   const appClassName = `${classes.app} ${giveMainNavStaticPosition ? "" : classes["app-with-sticky-nav"]}`;
