@@ -8,6 +8,9 @@
   gap: clamp(0.5rem, calc(1rem - 0.5vw), 1rem);
   justify-content: center;
   justify-self: center;
+  position: sticky;
+  top: var(--size-2);
+  box-shadow: 2px 3px 5px var(--scrim);
 }
 
 .button {

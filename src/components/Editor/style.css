@@ -1,6 +1,7 @@
 .editor {
   display: grid;
   border-radius: var(--size-3);
+  position: relative;
 }
 .editor .ql-editor {
   min-block-size: 15lh;
