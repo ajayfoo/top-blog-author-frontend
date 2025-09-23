@@ -6,10 +6,11 @@
   gap: var(--size-2-rev);
 }
 
-.app > :first-child {
+.app-with-sticky-nav > :first-child {
   position: sticky;
   top: var(--main-nav-top-gap);
 }
+
 .center {
   align-self: center;
 }

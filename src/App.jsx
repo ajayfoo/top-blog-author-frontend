@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useFetchData, useFetchUser, usePageTitle } from "./hooks.jsx";
 import MainNav from "./components/MainNav";
 import classes from "./style.module.css";
@@ -12,6 +12,7 @@ function App() {
     import.meta.env.VITE_API_URL + "/posts"
   );
   const user = useFetchUser();
+  const location = useLocation();
 
   const postsMap = new Map();
   posts?.forEach((p) => {
@@ -30,8 +31,12 @@ function App() {
     }
     setPosts(clonedPosts);
   };
+  const isEditPostPath = /\/posts\/[1-9]*\/edit/.test(location?.pathname);
+  const giveMainNavStaticPosition =
+    location?.pathname === "/posts/new" || isEditPostPath;
+  const appClassName = `${classes.app} ${giveMainNavStaticPosition ? "" : classes["app-with-sticky-nav"]}`;
   return (
-    <div className={classes.app}>
+    <div className={appClassName}>
       <MainNav />
       {posts ? (
         <UserContext.Provider value={{ user }}>
