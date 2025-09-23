@@ -66,30 +66,13 @@ const getFormData = async (title, bodyContents, isHidden) => {
   return formData;
 };
 
-function SubmitFormButton({ onSubmit, isCreateButton }) {
-  const [isSending, setIsSending] = useState(false);
-  const handleClick = async () => {
-    setIsSending(true);
-    try {
-      await onSubmit();
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsSending(false);
-    }
-  };
-
+function SubmitFormButton({ isSending, isCreateButton }) {
   const buttonClassName = classes["create-button"];
   const initialText = isCreateButton ? "Create" : "Update";
   const savingText = isCreateButton ? "Creating" : "Updating";
 
   return (
-    <button
-      disabled={isSending}
-      type="button"
-      onClick={handleClick}
-      className={buttonClassName}
-    >
+    <button disabled={isSending} type="submit" className={buttonClassName}>
       {isSending ? (
         <span className={classes["saving-text-wrapper"]}>
           <Spinner className={classes.spinner} />
@@ -103,7 +86,7 @@ function SubmitFormButton({ onSubmit, isCreateButton }) {
 }
 
 SubmitFormButton.propTypes = {
-  onSubmit: PropTypes.func,
+  isSending: PropTypes.bool,
   isCreateButton: PropTypes.bool,
 };
 
@@ -120,6 +103,7 @@ const PostForm = () => {
   const [title, setTitle] = useState(initialTitle);
   const [isHidden, setIsHidden] = useState(initialIsHidden);
   const [submitError, setSubmitError] = useState(null);
+  const [isSending, setIsSending] = useState(false);
   const quillRef = useRef(null);
   const errorModalRef = useRef(null);
   const navigate = useNavigate();
@@ -133,10 +117,12 @@ const PostForm = () => {
     };
   }, [submitError]);
 
-  const handleTitleChange = (e) => setTitle(e.target.value);
+  const handleTitleChange = (e) => setTitle(e.target.value.trimStart());
   const handleIsHiddenChange = (e) => setIsHidden(e.target.checked);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSending(true);
     const formData = await getFormData(
       title,
       quillRef.current.getContents(),
@@ -164,6 +150,8 @@ const PostForm = () => {
     } catch (err) {
       console.error(err);
       setSubmitError(err.message ?? genericErrorMessage);
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -176,13 +164,14 @@ const PostForm = () => {
   const bodyLabelId = "new-post-form-body";
   const publishFieldId = "new-post-form-publish";
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={handleSubmit}>
       <section className={classes.field}>
         <label htmlFor={titleFieldId}>Title</label>
         <textarea
           id={titleFieldId}
           onChange={handleTitleChange}
           value={title}
+          minLength={1}
           required
           className={classes["title-input"]}
         />
@@ -206,7 +195,7 @@ const PostForm = () => {
       </section>
       <>
         <SubmitFormButton
-          onSubmit={handleSubmit}
+          isSending={isSending}
           isCreateButton={!isExistingPost}
         />
         {submitError && (
