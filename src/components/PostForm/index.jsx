@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Editor from "../Editor";
 import classes from "./style.module.css";
 import { useOutletContext, useParams } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { usePageTitle } from "../../hooks";
 import PropTypes from "prop-types";
 import Spinner from "../Spinner";
+import ErrorModal from "../ErrorModal";
 
 const getBlobs = async (bodyContents) => {
   const blobs = [];
@@ -67,19 +68,6 @@ const getFormData = async (title, bodyContents, isHidden) => {
 
 function SubmitFormButton({ onSubmit, isCreateButton }) {
   const [isSending, setIsSending] = useState(false);
-  // const [error, setError] = useState(null);
-  // const errorModalRef = useRef(null);
-
-  // useEffect(() => {
-  //   if (!error) return;
-  //   errorModalRef.current.showModal();
-  // }, [error]);
-
-  // const handleErrorModalClose = () => {
-  //   errorModalRef.current.close();
-  //   setError(null);
-  // };
-
   const handleClick = async () => {
     setIsSending(true);
     try {
@@ -96,30 +84,21 @@ function SubmitFormButton({ onSubmit, isCreateButton }) {
   const savingText = isCreateButton ? "Creating" : "Updating";
 
   return (
-    <>
-      <button
-        disabled={isSending}
-        type="button"
-        onClick={handleClick}
-        className={buttonClassName}
-      >
-        {isSending ? (
-          <span className={classes["saving-text-wrapper"]}>
-            <Spinner className={classes.spinner} />
-            {savingText}
-          </span>
-        ) : (
-          initialText
-        )}
-      </button>
-      {/* {error && (
-        <ErrorModal
-          message={error}
-          onClose={handleErrorModalClose}
-          ref={errorModalRef}
-        />
-      )} */}
-    </>
+    <button
+      disabled={isSending}
+      type="button"
+      onClick={handleClick}
+      className={buttonClassName}
+    >
+      {isSending ? (
+        <span className={classes["saving-text-wrapper"]}>
+          <Spinner className={classes.spinner} />
+          {savingText}
+        </span>
+      ) : (
+        initialText
+      )}
+    </button>
   );
 }
 
@@ -127,6 +106,7 @@ SubmitFormButton.propTypes = {
   onSubmit: PropTypes.func,
   isCreateButton: PropTypes.bool,
 };
+
 const PostForm = () => {
   const { postsMap, addPost, replacePost } = useOutletContext();
   const { id: postId } = useParams();
@@ -139,8 +119,19 @@ const PostForm = () => {
 
   const [title, setTitle] = useState(initialTitle);
   const [isHidden, setIsHidden] = useState(initialIsHidden);
+  const [submitError, setSubmitError] = useState(null);
   const quillRef = useRef(null);
+  const errorModalRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!submitError) return;
+    const modal = errorModalRef.current;
+    modal.showModal();
+    return () => {
+      modal.close();
+    };
+  }, [submitError]);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleIsHiddenChange = (e) => setIsHidden(e.target.checked);
@@ -151,6 +142,7 @@ const PostForm = () => {
       quillRef.current.getContents(),
       isHidden
     );
+    const genericErrorMessage = `Failed to ${isExistingPost ? "update" : "create"} post`;
     try {
       if (isExistingPost) {
         const updatedPost = await updatePost(formData, postId);
@@ -158,7 +150,7 @@ const PostForm = () => {
           replacePost(updatedPost);
           navigate(`/posts/${postId}`);
         } else {
-          throw new Error("Failed to update post");
+          throw new Error(genericErrorMessage);
         }
         return;
       }
@@ -167,11 +159,17 @@ const PostForm = () => {
         addPost(newPost);
         navigate(`/posts/${newPost.id}`);
       } else {
-        throw new Error("Failed to create post");
+        throw new Error(genericErrorMessage);
       }
     } catch (err) {
       console.error(err);
+      setSubmitError(err.message ?? genericErrorMessage);
     }
+  };
+
+  const handleErrorModalClose = () => {
+    errorModalRef.current.close();
+    setSubmitError(null);
   };
 
   const titleFieldId = "new-post-form-title";
@@ -206,13 +204,19 @@ const PostForm = () => {
         />
         <label htmlFor={publishFieldId}>Unpublish</label>
       </section>
-      {/* <button className={classes["create-button"]}>
-        {isExistingPost ? "Update" : "Create"}
-      </button> */}
-      <SubmitFormButton
-        onSubmit={handleSubmit}
-        isCreateButton={!isExistingPost}
-      />
+      <>
+        <SubmitFormButton
+          onSubmit={handleSubmit}
+          isCreateButton={!isExistingPost}
+        />
+        {submitError && (
+          <ErrorModal
+            message={submitError}
+            onClose={handleErrorModalClose}
+            ref={errorModalRef}
+          />
+        )}
+      </>
     </form>
   );
 };
