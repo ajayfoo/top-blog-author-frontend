@@ -4,6 +4,7 @@ import MainNav from "./components/MainNav";
 import classes from "./style.module.css";
 import Spinner from "./components/Spinner";
 import { UserContext } from "./contexts";
+import "./App.css";
 
 function App() {
   usePageTitle("TOP Blog");
