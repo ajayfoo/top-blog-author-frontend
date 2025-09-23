@@ -4,6 +4,8 @@ import classes from "./style.module.css";
 import { useOutletContext, useParams } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { usePageTitle } from "../../hooks";
+import PropTypes from "prop-types";
+import Spinner from "../Spinner";
 
 const getBlobs = async (bodyContents) => {
   const blobs = [];
@@ -63,6 +65,68 @@ const getFormData = async (title, bodyContents, isHidden) => {
   return formData;
 };
 
+function SubmitFormButton({ onSubmit, isCreateButton }) {
+  const [isSending, setIsSending] = useState(false);
+  // const [error, setError] = useState(null);
+  // const errorModalRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (!error) return;
+  //   errorModalRef.current.showModal();
+  // }, [error]);
+
+  // const handleErrorModalClose = () => {
+  //   errorModalRef.current.close();
+  //   setError(null);
+  // };
+
+  const handleClick = async () => {
+    setIsSending(true);
+    try {
+      await onSubmit();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSending(false);
+    }
+  };
+
+  const buttonClassName = classes["create-button"];
+  const initialText = isCreateButton ? "Create" : "Update";
+  const savingText = isCreateButton ? "Creating" : "Updating";
+
+  return (
+    <>
+      <button
+        disabled={isSending}
+        type="button"
+        onClick={handleClick}
+        className={buttonClassName}
+      >
+        {isSending ? (
+          <span className={classes["saving-text-wrapper"]}>
+            <Spinner className={classes.spinner} />
+            {savingText}
+          </span>
+        ) : (
+          initialText
+        )}
+      </button>
+      {/* {error && (
+        <ErrorModal
+          message={error}
+          onClose={handleErrorModalClose}
+          ref={errorModalRef}
+        />
+      )} */}
+    </>
+  );
+}
+
+SubmitFormButton.propTypes = {
+  onSubmit: PropTypes.func,
+  isCreateButton: PropTypes.bool,
+};
 const PostForm = () => {
   const { postsMap, addPost, replacePost } = useOutletContext();
   const { id: postId } = useParams();
@@ -81,8 +145,7 @@ const PostForm = () => {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleIsHiddenChange = (e) => setIsHidden(e.target.checked);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     const formData = await getFormData(
       title,
       quillRef.current.getContents(),
@@ -115,7 +178,7 @@ const PostForm = () => {
   const bodyLabelId = "new-post-form-body";
   const publishFieldId = "new-post-form-publish";
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form className={classes.form}>
       <section className={classes.field}>
         <label htmlFor={titleFieldId}>Title</label>
         <textarea
@@ -143,9 +206,13 @@ const PostForm = () => {
         />
         <label htmlFor={publishFieldId}>Unpublish</label>
       </section>
-      <button className={classes["create-button"]}>
+      {/* <button className={classes["create-button"]}>
         {isExistingPost ? "Update" : "Create"}
-      </button>
+      </button> */}
+      <SubmitFormButton
+        onSubmit={handleSubmit}
+        isCreateButton={!isExistingPost}
+      />
     </form>
   );
 };

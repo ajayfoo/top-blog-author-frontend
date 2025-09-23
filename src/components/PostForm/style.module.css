@@ -53,3 +53,13 @@
   outline: none;
   border-color: var(--outline);
 }
+
+.saving-text-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--size-1);
+}
+
+.spinner > svg > g {
+  stroke: var(--on-primary);
+}
