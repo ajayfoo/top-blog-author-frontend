@@ -172,6 +172,7 @@ const PostForm = () => {
           onChange={handleTitleChange}
           value={title}
           minLength={1}
+          maxLength={200}
           required
           className={classes["title-input"]}
         />
