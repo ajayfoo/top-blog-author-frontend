@@ -7,7 +7,6 @@ https://github.com/user-attachments/assets/eeb0f06f-46cf-41f7-bcbb-ff22284a7713
 2. [TOP Blog API](https://github.com/ajayfoo/top-blog-api)
 
 ## Screenshots
-
 ### Light theme
 Theme will be based on user's preference  
 
