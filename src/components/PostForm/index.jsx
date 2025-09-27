@@ -20,7 +20,8 @@ const getBlobs = async (bodyContents) => {
   return blobs;
 };
 
-const isLocalUrl = (url) => url.startsWith("blob:http://localhost");
+const isLocalUrl = (url) =>
+  url.startsWith(`blob:${import.meta.env.VITE_ORIGIN}`);
 
 const getBlobFromLocalUrl = (localUrl) => fetch(localUrl).then((r) => r.blob());
 
