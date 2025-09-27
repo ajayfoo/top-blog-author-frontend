@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SupportedBlots from "../Blots/supportedBlots.js";
 import Quill from "quill/core";
 import PropTypes from "prop-types";
@@ -243,6 +243,7 @@ LinkButton.propTypes = {
 };
 
 const ImageButton = ({ quillRef }) => {
+  const inputRef = useRef(null);
   const handleChange = (e) => {
     const url = URL.createObjectURL(e.target.files[0]);
     const value = {
@@ -259,6 +260,7 @@ const ImageButton = ({ quillRef }) => {
       Quill.sources.USER
     );
     quill.setSelection(range.index + 2, Quill.sources.SILENT);
+    inputRef.current.value = null;
   };
   return (
     <label className={classes.imageIconLabel}>
@@ -269,6 +271,7 @@ const ImageButton = ({ quillRef }) => {
         onChange={handleChange}
         name="image"
         accept="image/*"
+        ref={inputRef}
       />
     </label>
   );
