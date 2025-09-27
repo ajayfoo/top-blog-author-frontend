@@ -1,3 +1,5 @@
+@import url("./../../common-styles/post.css");
+
 .editor {
   display: grid;
   border-radius: var(--size-3);
@@ -10,40 +12,13 @@
   border: 1px solid transparent;
   border-radius: var(--size-3);
   padding: var(--size-2) var(--size-2);
-  display: grid;
-  align-content: start;
 }
+
 .editor .ql-editor:hover {
   border-color: var(--outline-variant);
 }
+
 .editor .ql-editor:focus {
   outline: none;
   border-color: var(--outline);
-}
-
-.editor .ql-editor img {
-  max-inline-size: 100%;
-  max-block-size: 100%;
-  justify-self: center;
-}
-
-.editor .ql-editor hr {
-  width: 100%;
-}
-
-.ql-editor h1 {
-  font-size: 2rem;
-  margin-block: 0.5rem;
-}
-
-.ql-editor h2 {
-  font-size: 1.5rem;
-  margin-block: 0.25rem;
-}
-
-.ql-editor blockquote {
-  margin: 0;
-  margin-inline-start: 10px;
-  padding-inline-start: 10px;
-  border-inline-start: 3px solid;
 }
