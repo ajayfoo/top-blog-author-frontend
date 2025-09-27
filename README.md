@@ -1,6 +1,6 @@
 # TOP Blog Author Frontend
 
-https://github.com/user-attachments/assets/79ba3764-174f-4a1c-8828-af92c0d8fded
+https://github.com/user-attachments/assets/eeb0f06f-46cf-41f7-bcbb-ff22284a7713
 
 ## Companion projects
 1. [TOP Blog Viewer Frontend](https://github.com/ajayfoo/top-blog-viewer-frontend)
